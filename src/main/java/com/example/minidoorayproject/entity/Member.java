@@ -12,19 +12,16 @@ import javax.persistence.Table;
 @Getter
 @Setter
 @Entity
-@Table(name = "User")
+@Table(name = "Member")
 @NoArgsConstructor
-public class User {
+public class Member {
   @Id
-  @Column(name = "user_id")
-  private Integer userId;
+  @Column(name = "member_id")
+  private Integer memberId;
 
-  @Column(name = "id")
-  private String id;
+  @Column(name = "member_name")
+  private String memberName;
 
-  @Column(name = "email")
-  private String email;
-
-  @Column(name = "password")
-  private String password;
+  @Column(name = "member_email")
+  private String memberEmail;
 }
