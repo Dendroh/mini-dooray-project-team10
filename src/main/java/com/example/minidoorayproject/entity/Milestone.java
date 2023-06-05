@@ -12,13 +12,17 @@ import java.time.LocalDateTime;
 @Table(name = "milestone")
 public class Milestone {
     @Id
+    @Column(name = "milestone_id")
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private int milestoneId;
 
+    @Column(name = "milestone_name")
     private String milestoneName;
 
+    @Column(name = "start_datetime")
     private LocalDateTime startDatetime;
 
+    @Column(name = "end_datetime")
     private LocalDateTime endDatetime;
 
     @ManyToOne

@@ -13,20 +13,22 @@ import java.time.LocalDateTime;
 @Table(name = "task")
 public class Task {
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @Column(name = "task_id")
     private int taskId;
 
+    @Column(name = "task_name")
     private String taskName;
 
     private String content;
 
+    @Column(name = "write_time")
     private LocalDateTime writeTime;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "task_project_id")
     private Project project;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_writer_id")
     private Member writer;
 

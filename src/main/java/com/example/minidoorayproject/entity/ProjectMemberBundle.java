@@ -1,5 +1,6 @@
 package com.example.minidoorayproject.entity;
 
+import com.example.minidoorayproject.entity.compositekey.ProjectMemberBundlePk;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,16 +12,36 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "project_member_bundle")
 public class ProjectMemberBundle {
-    @Id
+
+    @EmbeddedId
+    private ProjectMemberBundlePk PMpk;
+
+    @Column(name = "register_time")
+    private LocalDateTime registerTime;
+
     @ManyToOne
-    @JoinColumn(name = "project_id")
+    @JoinColumn(name = "project_id", insertable = false, updatable = false)
     private Project project;
 
-    @Id
     @ManyToOne
-    @JoinColumn(name = "member_id")
+    @JoinColumn(name = "member_id", insertable = false, updatable = false)
     private Member member;
 
-    private LocalDateTime registerTime;
+    public void setProject(Project project) {
+        this.project = project;
+        if (PMpk == null) {
+            PMpk = new ProjectMemberBundlePk();
+        }
+        PMpk.setProjectId(project.getProjectId());
+    }
+
+    public void setMember(Member member) {
+        this.member = member;
+        if (PMpk == null) {
+            PMpk = new ProjectMemberBundlePk();
+        }
+        PMpk.setMemberId(member.getMemberId());
+    }
+
 
 }

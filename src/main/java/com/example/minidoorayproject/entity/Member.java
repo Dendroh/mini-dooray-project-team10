@@ -13,8 +13,8 @@ import javax.persistence.*;
 @NoArgsConstructor
 public class Member {
   @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "member_id", nullable = false, unique = true)
-//  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Integer memberId;
 
   @Column(name = "member_name", nullable = false)
@@ -22,4 +22,6 @@ public class Member {
 
   @Column(name = "member_email", nullable = false)
   private String memberEmail;
+
+
 }

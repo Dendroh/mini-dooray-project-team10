@@ -12,8 +12,9 @@ import javax.persistence.*;
 public class StatusCode {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @Column(name = "code_id")
     private int codeId;
-
+    @Column(name = "status_name")
     private String statusName;
 
 }

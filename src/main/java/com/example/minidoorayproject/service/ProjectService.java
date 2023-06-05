@@ -22,6 +22,16 @@ public class ProjectService {
         return projectRepository.save(project);
     }
 
+    public Project updateProject(int id, Project updatedProject) {
+        return projectRepository.findById(id)
+                .map(project -> {
+                    project.setProjectTitle(updatedProject.getProjectTitle());
+                    project.setProjectStatus(updatedProject.getProjectStatus());
+                    return projectRepository.save(project);
+                })
+                .orElseThrow(() -> new IllegalArgumentException("Invalid project Id:" + id));
+    }
+
     public List<Project> getAllProjects() {
         return projectRepository.findAll();
     }

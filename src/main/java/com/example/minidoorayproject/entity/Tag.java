@@ -13,10 +13,13 @@ import javax.persistence.*;
 public class Tag {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @Column(name = "tag_id")
     private Long tagId;
 
+    @Column(name = "tag_name")
     private String tagName;
 
+    @Column(name = "tag_color")
     private String tagColor;
 
     @ManyToOne

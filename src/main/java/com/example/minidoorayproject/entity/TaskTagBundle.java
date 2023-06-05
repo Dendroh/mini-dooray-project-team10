@@ -1,6 +1,7 @@
 package com.example.minidoorayproject.entity;
 
 
+import com.example.minidoorayproject.entity.compositekey.TaskTagBundlePk;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -13,15 +14,7 @@ import javax.persistence.*;
 public class TaskTagBundle {
 
 
-    @Id
-    @ManyToOne
-    @JoinColumn(name = "task_id")
-    private Task task;
-
-
-    @Id
-    @ManyToOne
-    @JoinColumn(name = "tag_id")
-    private Tag tag;
+   @EmbeddedId
+    private TaskTagBundlePk TTpk;
 
 }
