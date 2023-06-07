@@ -1,6 +1,7 @@
 package com.example.minidoorayproject.service;
 
 import com.example.minidoorayproject.entity.Task;
+import com.example.minidoorayproject.exception.ResourceNotFoundException;
 import com.example.minidoorayproject.repository.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,8 +23,8 @@ public class TaskService {
         return taskRepository.save(task);
     }
 
-    public Optional<Task> getTask(int id) {
-        return taskRepository.findById(id);
+    public Task getTask(int id) {
+        return taskRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("task", "id", id));
     }
 
     public Task updateTask(int id, Task updatedTask) {

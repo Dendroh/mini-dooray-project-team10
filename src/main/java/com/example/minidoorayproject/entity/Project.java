@@ -9,25 +9,20 @@ import javax.persistence.*;
 @Setter
 @Entity
 @Table(name = "project")
-@AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode
 public class Project {
     @Id
     @Column(name = "project_id")
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private int projectId;
 
     @Column(name = "project_title")
     private String projectTitle;
 
-    @ManyToOne
-    @JoinColumn(name = "project_status_code_id")
+    @OneToOne
+    @JoinColumn(name = "project_status_code_id", referencedColumnName = "code_id")
     private StatusCode projectStatus;
 
     @ManyToOne
-    @JoinColumn(name = "admin_id")
+    @JoinColumn(name = "admin_id", referencedColumnName = "member_id")
     private Member admin;
-
-
 }

@@ -1,8 +1,7 @@
 package com.example.minidoorayproject.entity;
 
 import com.example.minidoorayproject.entity.compositekey.ProjectMemberBundlePk;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -10,6 +9,9 @@ import java.time.LocalDateTime;
 @Setter
 @Getter
 @Entity
+@EqualsAndHashCode
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "project_member_bundle")
 public class ProjectMemberBundle {
 
