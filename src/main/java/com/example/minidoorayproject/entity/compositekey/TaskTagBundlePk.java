@@ -3,9 +3,7 @@ package com.example.minidoorayproject.entity.compositekey;
 import com.example.minidoorayproject.entity.Milestone;
 import com.example.minidoorayproject.entity.Tag;
 import com.example.minidoorayproject.entity.Task;
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.Embeddable;
 import javax.persistence.Id;
@@ -13,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import java.io.Serializable;
 
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode

@@ -48,18 +48,23 @@ public class ProjectController {
     }
 
     // Additional endpoint for adding a member to a project
-    @PostMapping("/{projectId}/member")
-    public ProjectMemberBundle addProjectMember(@PathVariable int projectId, @RequestBody Member member) {
-        Project project = getProjectById(projectId);
-        ProjectMemberBundle projectMemberBundle = new ProjectMemberBundle();
-        projectMemberBundle.setProject(project);
-        projectMemberBundle.setMember(member);
-        return projectMemberBundleService.saveProjectMemberBundle(projectMemberBundle);
-    }
+//    @PostMapping("/{projectId}/member") // 프로젝트를 넘겨주는 방법.
+//    public ProjectMemberBundle addProjectMember(@PathVariable int projectId, @RequestBody Member member) {
+//        Project project = getProjectById(projectId);
+//        ProjectMemberBundle projectMemberBundle = new ProjectMemberBundle();
+//        projectMemberBundle.setProject(project);
+//        projectMemberBundle.setMember(member);
+//        return projectMemberBundleService.saveProjectMemberBundle(projectMemberBundle);
+//    }
 
     // Additional endpoints for fetching project members
     @GetMapping("/{projectId}/members")
     public List<ProjectMemberBundle> getProjectMembers(@PathVariable int projectId) {
         return projectMemberBundleService.getProjectMemberBundlesByProjectId(projectId);
     }
+
+//    @DeleteMapping("/{projectId}/member/{memberId}")
+//    public void deleteProjectMember(@PathVariable int projectId, @PathVariable int memberId, @RequestBody ProjectMemberBundle projectMemberBundle){
+//        projectMemberBundleService.deleteProject(projectId, memberId);
+//    }
 }
