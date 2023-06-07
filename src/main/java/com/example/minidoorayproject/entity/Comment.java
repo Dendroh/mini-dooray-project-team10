@@ -1,7 +1,8 @@
 package com.example.minidoorayproject.entity;
 
 
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -9,12 +10,10 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @Entity
-@EqualsAndHashCode
-@NoArgsConstructor
-@AllArgsConstructor
 @Table(name = "comment")
 public class Comment {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "comment_id")
     private int commentId;
 
@@ -22,12 +21,12 @@ public class Comment {
     @Column(name = "write_time")
     private LocalDateTime writeTime;
 
-    @ManyToOne
-    @JoinColumn(name = "comment_task_id", referencedColumnName = "task_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "comment_task_id")
     private Task task;
 
-    @ManyToOne
-    @JoinColumn(name = "member_writer_id", referencedColumnName = "member_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "member_writer_id")
     private Member writer;
 
 
