@@ -8,6 +8,8 @@ import com.example.minidoorayproject.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Objects;
+
 @Service
 @RequiredArgsConstructor
 public class MemberServiceImpl implements MemberService {
@@ -33,6 +35,16 @@ public class MemberServiceImpl implements MemberService {
     public MemberDto getMember(int id) {
         Member member = memberRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Member", "id", String.valueOf(id)));
+        return convertToDto(member);
+    }
+
+    @Override
+    public MemberDto getMember(String email) {
+        Member member = memberRepository.findByMemberEmail(email);
+
+        if(Objects.isNull(member)){
+            new ResourceNotFoundException("Member", "email", String.valueOf(email));
+        }
         return convertToDto(member);
     }
 

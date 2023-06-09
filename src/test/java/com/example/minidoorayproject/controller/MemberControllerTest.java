@@ -85,6 +85,21 @@ public class MemberControllerTest {
     }
 
     @Test
+    public void testGetMemberEmail() throws Exception {
+        int memberId = 1;
+
+        MemberDto memberDto = new MemberDto(1, "John", "john@example.com");
+
+        given(memberService.getMember("john@example.com")).willReturn(memberDto);
+
+        mockMvc.perform(get("/dooray/project/member/email/{email}", "john@example.com"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.memberId").value(memberId))
+                .andExpect(jsonPath("$.memberName").value(memberDto.getMemberName()))
+                .andExpect(jsonPath("$.memberEmail").value(memberDto.getMemberEmail()));
+    }
+
+    @Test
     public void testUpdateMember() throws Exception {
         int memberId = 1;
 

@@ -18,6 +18,8 @@ import java.util.List;
 
     MemberDto  getMember(int id);
 
+    MemberDto getMember(String email);
+
     MemberDto updateMember(int id, Member member);
 
     void deleteMember(int id);

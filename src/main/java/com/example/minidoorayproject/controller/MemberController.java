@@ -33,6 +33,12 @@ public class MemberController {
         return ResponseEntity.ok(memberDto);
     }
 
+    @GetMapping("/email/{email}")
+    public ResponseEntity<MemberDto> getMember(@PathVariable String email) {
+        MemberDto memberDto = memberService.getMember(email);
+        return ResponseEntity.ok(memberDto);
+    }
+
     @PutMapping("/{id}")
     public ResponseEntity<MemberDto> updateMember(@PathVariable int id, @RequestBody Member member) {
         MemberDto updatedMember = memberService.updateMember(id, member);
