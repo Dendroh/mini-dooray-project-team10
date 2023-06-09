@@ -8,6 +8,7 @@ import javax.persistence.*;
 @Setter
 @Entity
 @Table(name = "status_code")
+@NoArgsConstructor
 public class StatusCode {
     @Id
     @Column(name = "code_id")

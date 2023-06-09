@@ -12,9 +12,11 @@ import java.util.List;
 public interface ProjectMemberBundleRepository extends JpaRepository<ProjectMemberBundle, ProjectMemberBundlePk> {
 
 
-    List<ProjectMemberBundle> findByProject_ProjectId(int projectId);
-    List<ProjectMemberBundle> findByMember_MemberId(int memberId);
+    List<ProjectMemberBundle> findByProject_ProjectTitle(String title);
 
+    List<ProjectMemberBundle> findByMember_MemberEmail(String email);
 
+    @Override
+    <S extends ProjectMemberBundle> S saveAndFlush(S entity);
 }
 

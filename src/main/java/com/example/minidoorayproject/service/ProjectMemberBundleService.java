@@ -1,5 +1,8 @@
 package com.example.minidoorayproject.service;
 
+import com.example.minidoorayproject.domain.MemberDto;
+import com.example.minidoorayproject.domain.ProjectMemberBundleDto;
+import com.example.minidoorayproject.entity.Member;
 import com.example.minidoorayproject.entity.ProjectMemberBundle;
 import com.example.minidoorayproject.repository.ProjectMemberBundleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,26 +19,17 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class ProjectMemberBundleService {
+public interface ProjectMemberBundleService {
 
-    @Autowired
-    private ProjectMemberBundleRepository projectMemberBundleRepository;
 
-    public ProjectMemberBundle saveProjectMemberBundle(ProjectMemberBundle projectMemberBundle) {
-        return projectMemberBundleRepository.save(projectMemberBundle);
-    }
+    ProjectMemberBundleDto selectAllProjectMemberBundleByTitle(String projectTitle);
 
-    public List<ProjectMemberBundle> getProjectMemberBundlesByProjectId(int projectId) {
-        return projectMemberBundleRepository.findByProject_ProjectId(projectId);
-    }
+    ProjectMemberBundleDto selectAllProjectMemberBundleByEmail(String memberEmail);
 
-    public List<ProjectMemberBundle> getProjectMemberBundlesByMemberId(int memberId) {
-        return projectMemberBundleRepository.findByMember_MemberId(memberId);
-    }
+    ProjectMemberBundleDto createProjectMemberBundle(int projectId, int memberId);
 
-    public void deleteProject(int projectId, int memberId) {
-        ProjectMemberBundlePk id = new ProjectMemberBundlePk(projectId, memberId);
-        projectMemberBundleRepository.deleteById(id);
-    }
+    ProjectMemberBundleDto updateProjectMemberBundle(ProjectMemberBundleDto projectMemberBundleDto);
+
+    void deleteProjectMemberBundle(int id);
 }
 

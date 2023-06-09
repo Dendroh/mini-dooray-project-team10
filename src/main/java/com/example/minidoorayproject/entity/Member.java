@@ -26,4 +26,5 @@ public class Member {
 
   @Column(name = "email")
   private String memberEmail;
+
 }

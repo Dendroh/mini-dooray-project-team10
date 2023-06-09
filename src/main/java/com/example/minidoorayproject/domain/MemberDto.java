@@ -1,14 +1,18 @@
 package com.example.minidoorayproject.domain;
 
-import lombok.Getter;
-import lombok.Setter;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import lombok.*;
 import org.springframework.stereotype.Component;
+
+import javax.validation.constraints.NotNull;
 
 @Getter
 @Setter
-@Component
+@Data
+@JsonInclude(value = JsonInclude.Include.NON_NULL)
+@AllArgsConstructor
 public class MemberDto {
-
+  @NotNull
   private Integer memberId;
 
   private String memberName;

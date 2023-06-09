@@ -2,7 +2,9 @@ package com.example.minidoorayproject.service.impl;
 
 
 import com.example.minidoorayproject.domain.ProjectDto;
+import com.example.minidoorayproject.entity.Member;
 import com.example.minidoorayproject.entity.Project;
+import com.example.minidoorayproject.entity.StatusCode;
 import com.example.minidoorayproject.repository.ProjectRepository;
 import com.example.minidoorayproject.service.ProjectService;
 import lombok.RequiredArgsConstructor;
@@ -24,16 +26,19 @@ public class ProjectServiceImpl implements ProjectService {
 
     private final ProjectRepository projectRepository;
 
-
-
-
     @Override
     public ProjectDto createProjectBy(ProjectDto projectDto) {
         Project project = new Project();
-        // Populate the project entity from dto
-        // Assume you have corresponding setter methods in Project class
+        project.setProjectId(projectDto.getProjectId());
         project.setProjectTitle(projectDto.getProjectTitle());
-        // ... set other properties
+
+        StatusCode statusCode = new StatusCode();
+        statusCode.setCodeId(projectDto.getCodeId());
+        project.setProjectStatus(statusCode);
+
+        Member admin = new Member();
+        admin.setMemberId(projectDto.getAdminId());
+        project.setAdmin(admin);
 
         project = projectRepository.save(project);
 
@@ -79,12 +84,6 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     private ProjectDto convertToDto(Project project) {
-        ProjectDto projectDto = new ProjectDto();
-        // Populate the dto from the project entity
-        // Assume you have corresponding getter methods in Project class
-        projectDto.setProjectTitle(project.getProjectTitle());
-        // ... get other properties
-
-        return projectDto;
+        return new ProjectDto(project.getProjectId(),project.getProjectTitle(),project.getProjectStatus().getCodeId(),project.getAdmin().getMemberId());
     }
 }
