@@ -1,6 +1,7 @@
 package com.example.minidoorayproject.entity;
 
 
+import com.example.minidoorayproject.domain.ProjectDto;
 import lombok.*;
 
 import javax.persistence.*;
@@ -25,4 +26,7 @@ public class Project {
     @ManyToOne
     @JoinColumn(name = "admin_id", referencedColumnName = "member_id")
     private Member admin;
+
+
+
 }

@@ -1,127 +1,122 @@
-//package com.example.minidoorayproject.controller;
-//
-//import com.example.minidoorayproject.entity.Member;
-//import com.example.minidoorayproject.entity.Project;
-//import com.example.minidoorayproject.entity.ProjectMemberBundle;
-//import com.example.minidoorayproject.entity.StatusCode;
-//import com.example.minidoorayproject.service.MemberService;
-//import com.example.minidoorayproject.service.ProjectMemberBundleService;
-//import com.example.minidoorayproject.service.ProjectService;
-//import com.fasterxml.jackson.databind.ObjectMapper;
-//import org.junit.jupiter.api.DisplayName;
-//import org.junit.jupiter.api.Order;
-//import org.junit.jupiter.api.Test;
-//import org.junit.runner.RunWith;
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-//import org.springframework.boot.test.context.SpringBootTest;
-//import org.springframework.boot.test.mock.mockito.MockBean;
-//import org.springframework.http.MediaType;
-//import org.springframework.test.context.junit4.SpringRunner;
-//import org.springframework.test.web.servlet.MockMvc;
-//
-//import static org.hamcrest.Matchers.equalTo;
-//import static org.hamcrest.Matchers.hasSize;
-//import static org.mockito.ArgumentMatchers.anyInt;
-//import static org.mockito.Mockito.doReturn;
-//import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-//import static org.mockito.ArgumentMatchers.any;
-//import static org.mockito.Mockito.when;
-//import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-//import static org.hamcrest.core.Is.is;
-//import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-//
-//import java.util.Arrays;
-//import java.util.List;
-//
-//@RunWith(SpringRunner.class)
-//@SpringBootTest
-//@AutoConfigureMockMvc
-//class ProjectControllerTest {
-////
-////    @Autowired
-////    MockMvc mockMvc;
-////
-////    @MockBean
-////    private ProjectService projectService;
-////
-////    @MockBean
-////    private ProjectMemberBundleService projectMemberBundleService;
-////
-////    @MockBean
-////    private MemberService memberService;
-////
-////
-////
-////
-////    @Test
-////    @Order(1)
-////    void testCreateProject() throws Exception {
-////        Project project = new Project();
-////        project.setProjectId(11);
-////        project.setProjectTitle("Project Name");
-////        Member admin = new Member();
-////        admin.setMemberId(11);
-////        admin.setMemberName("Manty");
-////        admin.setMemberEmail("Manty@gmail.com");
-////        project.setAdmin(admin);
-////
-////        when(projectService.createProject(any(Project.class))).thenReturn(project);
-////
-////        mockMvc.perform(post("/api/project", 11)
-////                        .contentType(MediaType.APPLICATION_JSON)
-////                        .content(new ObjectMapper().writeValueAsString(project)))
-////                .andExpect(status().isOk())
-////                .andExpect(jsonPath("$.projectId", is(11)))
-////                .andExpect(jsonPath("$.projectTitle", is("Project Name")))
-////                .andExpect(jsonPath("$.admin.memberId", is(11)));
-////    }
-////
-////    @Test
-////    @Order(2)
-////    void testGetProjectMembers() throws Exception {
-////        int projectId = 1;
-////
-////        Member member1 = new Member();
-////        member1.setMemberId(1);
-////        member1.setMemberName("Manty");
-////        member1.setMemberEmail("Manty@gmail.com");
-////        Member member2 = new Member();
-////        member2.setMemberId(2);
-////        member2.setMemberName("Guy");
-////        member2.setMemberEmail("Guy@gmail.com");
-////
-////        StatusCode statusCode = new StatusCode();
-////        statusCode.setCodeId(1);
-////        statusCode.setStatusName("Run");
-////
-////        Project project = new Project();
-////        project.setProjectId(projectId);
-////        project.setProjectTitle("Project Name");
-////        project.setProjectStatus(statusCode);
-////
-////
-////
-////        ProjectMemberBundle bundle1 = new ProjectMemberBundle();
-////        bundle1.setProject(project);
-////        bundle1.setMember(member1);
-////
-////        ProjectMemberBundle bundle2 = new ProjectMemberBundle();
-////        bundle2.setProject(project);
-////        bundle2.setMember(member2);
-////
-////        List<ProjectMemberBundle> bundles = Arrays.asList(bundle1, bundle2);
-////
-////        when(projectMemberBundleService.getProjectMemberBundlesByProjectId(anyInt())).thenReturn(bundles);
-////
-////        mockMvc.perform(get("/api/project/" + projectId + "/members")
-////                        .contentType(MediaType.APPLICATION_JSON))
-////                .andExpect(status().isOk())
-////                .andExpect(jsonPath("$", hasSize(2)))
-////                .andExpect(jsonPath("$[0].member.memberId", is(1)))
-////                .andExpect(jsonPath("$[1].member.memberId", is(2)));
-////    }
-//}
-//
-//
-//
+package com.example.minidoorayproject.controller;
+
+import com.example.minidoorayproject.domain.MemberDto;
+import com.example.minidoorayproject.domain.ProjectDto;
+import com.example.minidoorayproject.domain.StatusCodeDto;
+import com.example.minidoorayproject.entity.Member;
+import com.example.minidoorayproject.entity.Project;
+import com.example.minidoorayproject.entity.StatusCode;
+import com.example.minidoorayproject.service.ProjectService;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.extern.slf4j.Slf4j;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
+import org.springframework.test.web.servlet.MockMvc;
+
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.hamcrest.Matchers.*;
+
+@Slf4j
+@SpringBootTest
+@AutoConfigureMockMvc
+public class ProjectControllerTest {
+
+    @Autowired
+    private MockMvc mockMvc;
+
+    @Mock
+    private ProjectService projectService;
+
+    @Autowired
+    private ObjectMapper objectMapper;
+
+    @BeforeEach
+    public void setup() {
+        MockitoAnnotations.openMocks(this);
+    }
+
+    @Test
+    public void testCreateProject() throws Exception {
+        MemberDto memberDto = new MemberDto();
+        memberDto.setMemberId(11);
+        memberDto.setMemberName("Manty");
+        memberDto.setMemberEmail("Manty@gmail.com");
+
+        StatusCodeDto statusCodeDto = new StatusCodeDto();
+        statusCodeDto.setCodeId(11);
+        statusCodeDto.setStatusName("Run");
+
+        ProjectDto projectDto = new ProjectDto();
+        projectDto.setProjectId(11);
+        projectDto.setProjectTitle("Project 11");
+        projectDto.setAdminId(memberDto.getMemberId());
+        projectDto.setCodeId(statusCodeDto.getCodeId());
+
+        log.info("" + projectDto.getProjectId());
+        log.info("" + projectDto.getProjectTitle());
+        log.info("" + projectDto.getCodeId());
+        log.info("" + projectDto.getAdminId());
+
+
+
+        // Mock the service method
+        when(projectService.createProjectBy(eq(projectDto))).thenReturn(projectDto);
+
+
+        mockMvc.perform(post("/projects")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(projectDto)))
+                .andExpect(status().isCreated())
+                .andExpect(jsonPath("$.projectId", is(projectDto.getProjectId())))
+                .andExpect(jsonPath("$.projectTitle", is(projectDto.getProjectTitle())));
+    }
+
+    @Test
+    public void testGetProjectById() throws Exception {
+        int projectId = 1;
+        mockMvc.perform(get("/projects/" + projectId)
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.projectId", is(projectId)));
+    }
+
+    @Test
+    public void testGetProjectsByAccount() throws Exception {
+        String accountId = "nhnacademy";
+        mockMvc.perform(get("/projects/account/" + accountId)
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    public void testUpdateProject() throws Exception {
+        int projectId = 1;
+        ProjectDto projectDto = new ProjectDto();
+        projectDto.setProjectTitle("Updated Project");
+
+        mockMvc.perform(put("/projects/" + projectId)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(projectDto)))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.projectId", is(projectId)))
+                .andExpect(jsonPath("$.projectTitle", is(projectDto.getProjectTitle())));
+    }
+
+    @Test
+    public void testDeleteProject() throws Exception {
+        int projectId = 1;
+        mockMvc.perform(delete("/projects/" + projectId)
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isNoContent());
+    }
+}
