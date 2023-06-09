@@ -13,6 +13,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 public class Project {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "project_id")
     private int projectId;
 
