@@ -3,6 +3,7 @@ package com.example.minidoorayproject.service;
 import com.example.minidoorayproject.domain.MemberDto;
 import com.example.minidoorayproject.domain.ProjectDto;
 import com.example.minidoorayproject.domain.ProjectMemberBundleDto;
+import com.example.minidoorayproject.domain.ProjectMemberBundlePostReq;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,8 +16,8 @@ public interface ProjectMemberBundleService {
 
     List<ProjectDto> selectAllProjectBundleByEmail(String memberEmail);
 
-    ProjectMemberBundleDto createProjectMemberBundle(Integer projectId, Integer memberId);
+    ProjectMemberBundleDto createProjectMemberBundle(ProjectMemberBundlePostReq bundleDto);
 
-    void deleteProjectMemberBundle(Integer deleteProjectId, Integer deleteMemberId);
+    void deleteProjectMemberBundle(String deleteProjectTitle, String deleteMemberEmail);
 }
 

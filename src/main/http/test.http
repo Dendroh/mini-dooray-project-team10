@@ -2,7 +2,30 @@
 GET /projects/1
 Host: localhost:8082
 
+
+###
+# projectMemberBundle API
+
+GET /projects/members/Project 2
+Host: localhost:8082
+
 ###
 
-GET /projects/members/Project 100
+GET /members/projects/example3@gmail.com
+Host: localhost:8082
+
+###
+
+POST /projects/members
+Host: localhost:8082
+Content-Type: application/json
+
+{
+  "projectTitle": "Project 1",
+  "memberEmail": "example4@gmail.com"
+}
+
+###
+
+DELETE /projects/members/Project 1/example4@gmail.com
 Host: localhost:8082

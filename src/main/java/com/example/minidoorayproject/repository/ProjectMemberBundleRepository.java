@@ -16,7 +16,7 @@ public interface ProjectMemberBundleRepository extends JpaRepository<ProjectMemb
 
     List<ProjectMemberBundle> findByProject_ProjectId(Integer projectId);
 
-    ProjectMemberBundle findByPMpk_ProjectIdAndPMpk_MemberId(Integer projectId, Integer memberId);
+    ProjectMemberBundle findByMember_MemberEmailAndProject_ProjectTitle(String memberEmail, String projectTitle);
 
     @Override
     <S extends ProjectMemberBundle> S saveAndFlush(S entity);

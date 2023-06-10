@@ -3,6 +3,7 @@ package com.example.minidoorayproject.service.impl;
 import com.example.minidoorayproject.domain.MemberDto;
 import com.example.minidoorayproject.domain.ProjectDto;
 import com.example.minidoorayproject.domain.ProjectMemberBundleDto;
+import com.example.minidoorayproject.domain.ProjectMemberBundlePostReq;
 import com.example.minidoorayproject.entity.Member;
 import com.example.minidoorayproject.entity.Project;
 import com.example.minidoorayproject.entity.ProjectMemberBundle;
@@ -70,16 +71,16 @@ public class ProjectMemberBundleServiceImpl implements ProjectMemberBundleServic
     }
 
     @Override
-    public ProjectMemberBundleDto createProjectMemberBundle(Integer projectId, Integer memberId) {
+    public ProjectMemberBundleDto createProjectMemberBundle(ProjectMemberBundlePostReq bundleDto) {
 
-        Project project = projectRepository.findByProjectId(projectId);
-        Member member = memberRepository.findByMemberId(memberId);
+        Project project = projectRepository.findByProjectTitle(bundleDto.getProjectTitle());
+        Member member = memberRepository.findByMemberEmail(bundleDto.getMemberEmail());
 
         if (Objects.isNull(project))
-            throw new NotFoundProjectException(projectId);
+            throw new NotFoundProjectException(bundleDto.getProjectTitle());
 
         if (Objects.isNull(member))
-            throw new NotFoundMemberException(memberId);
+            throw new NotFoundMemberException(bundleDto.getMemberEmail());
 
         ProjectMemberBundle bundle  = new ProjectMemberBundle();
         bundle.setMember(member);
@@ -92,9 +93,9 @@ public class ProjectMemberBundleServiceImpl implements ProjectMemberBundleServic
     }
 
     @Override
-    public void deleteProjectMemberBundle(Integer deleteProjectId, Integer deleteMemberId) {
+    public void deleteProjectMemberBundle(String deleteProjectTitle, String deleteMemberEmail) {
         ProjectMemberBundle bundle = projectMemberBundleRepository
-                .findByPMpk_ProjectIdAndPMpk_MemberId(deleteProjectId, deleteMemberId);
+                .findByMember_MemberEmailAndProject_ProjectTitle(deleteMemberEmail, deleteProjectTitle);
 
         if (Objects.isNull(bundle))
             throw new NotFoundProjectMemberBundleException();

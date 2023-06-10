@@ -1,12 +1,17 @@
 package com.example.minidoorayproject.controller;
 
 import com.example.minidoorayproject.domain.MemberDto;
+import com.example.minidoorayproject.domain.ProjectDto;
+import com.example.minidoorayproject.domain.ProjectMemberBundleDto;
+import com.example.minidoorayproject.domain.ProjectMemberBundlePostReq;
+import com.example.minidoorayproject.exception.ValidationFailedException;
 import com.example.minidoorayproject.service.ProjectMemberBundleService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -17,6 +22,26 @@ public class ProjectMemberBundleController {
     @GetMapping("/projects/members/{projectTitle}")
     public List<MemberDto> getMembersByProjectTitle(@PathVariable("projectTitle") String projectTitle) {
         return service.selectAllProjectMemberBundleByTitle(projectTitle);
+    }
+
+    @GetMapping("/members/projects/{memberEmail}")
+    public List<ProjectDto> getProjectsByMemberEmail(@PathVariable("memberEmail") String memberEmail) {
+        return service.selectAllProjectBundleByEmail(memberEmail);
+    }
+
+    @PostMapping("/projects/members")
+    @ResponseStatus(HttpStatus.CREATED)
+    public ProjectMemberBundleDto postProjectMemberBundle(@Valid @RequestBody ProjectMemberBundlePostReq postReq, BindingResult result) {
+        if (result.hasErrors())
+            throw new ValidationFailedException(result);
+
+        return service.createProjectMemberBundle(postReq);
+    }
+
+    @DeleteMapping("/projects/members/{projectTitle}/{memberEmail}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteProjectMemberBundle(@PathVariable("projectTitle") String projectTitle, @PathVariable("memberEmail") String memberEmail) {
+        service.deleteProjectMemberBundle(projectTitle, memberEmail);
     }
 
 }
