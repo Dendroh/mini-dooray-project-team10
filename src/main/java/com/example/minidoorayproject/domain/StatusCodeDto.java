@@ -6,8 +6,6 @@ import org.springframework.stereotype.Component;
 
 import javax.validation.constraints.NotNull;
 
-@Getter
-@Setter
 @Data
 @JsonInclude(value = JsonInclude.Include.NON_NULL)
 @AllArgsConstructor

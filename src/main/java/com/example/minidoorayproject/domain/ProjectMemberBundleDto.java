@@ -9,8 +9,6 @@ import lombok.Setter;
 
 import javax.validation.constraints.NotNull;
 
-@Getter
-@Setter
 @Data
 @JsonInclude(value = JsonInclude.Include.NON_NULL)
 @AllArgsConstructor

@@ -58,7 +58,7 @@ public class ProjectServiceImpl implements ProjectService {
         List<Project> projects = projectRepository.findAllByAdmin_MemberId(accountId);
 
         return projects.stream()
-                .map(this::convertToDto)
+                .map(ProjectServiceImpl::convertToDto)
                 .collect(Collectors.toList());
     }
 
@@ -83,7 +83,7 @@ public class ProjectServiceImpl implements ProjectService {
         projectRepository.deleteById(id);
     }
 
-    private ProjectDto convertToDto(Project project) {
+    public static ProjectDto convertToDto(Project project) {
         return new ProjectDto(project.getProjectId(),project.getProjectTitle(),project.getProjectStatus().getCodeId(),project.getAdmin().getMemberId());
     }
 }

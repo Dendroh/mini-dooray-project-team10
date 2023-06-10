@@ -66,7 +66,7 @@ public class MemberServiceImpl implements MemberService {
         memberRepository.deleteById(id);
     }
 
-    private MemberDto convertToDto(Member member) {
+    public static MemberDto convertToDto(Member member) {
         return new MemberDto(member.getMemberId(), member.getMemberName(), member.getMemberEmail());
     }
 }

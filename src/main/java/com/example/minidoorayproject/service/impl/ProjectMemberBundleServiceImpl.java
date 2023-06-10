@@ -1,31 +1,110 @@
 package com.example.minidoorayproject.service.impl;
 
+import com.example.minidoorayproject.domain.MemberDto;
+import com.example.minidoorayproject.domain.ProjectDto;
+import com.example.minidoorayproject.domain.ProjectMemberBundleDto;
+import com.example.minidoorayproject.entity.Member;
+import com.example.minidoorayproject.entity.Project;
 import com.example.minidoorayproject.entity.ProjectMemberBundle;
-import com.example.minidoorayproject.entity.compositekey.ProjectMemberBundlePk;
+import com.example.minidoorayproject.exception.NotFoundMemberException;
+import com.example.minidoorayproject.exception.NotFoundProjectException;
+import com.example.minidoorayproject.exception.NotFoundProjectMemberBundleException;
+import com.example.minidoorayproject.repository.MemberRepository;
 import com.example.minidoorayproject.repository.ProjectMemberBundleRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.example.minidoorayproject.repository.ProjectRepository;
+import com.example.minidoorayproject.service.ProjectMemberBundleService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
-public class ProjectMemberBundleServiceImpl {
+@Service
+@RequiredArgsConstructor
+public class ProjectMemberBundleServiceImpl implements ProjectMemberBundleService {
 
-//    @Autowired
-//    private ProjectMemberBundleRepository projectMemberBundleRepository;
-//
-//    public ProjectMemberBundle saveProjectMemberBundle(ProjectMemberBundle projectMemberBundle) {
-//        return projectMemberBundleRepository.save(projectMemberBundle);
-//    }
-//
-//    public List<ProjectMemberBundle> getProjectMemberBundlesByProjectId(int projectId) {
-//        return projectMemberBundleRepository.findByProject_ProjectId(projectId);
-//    }
-//
-//    public List<ProjectMemberBundle> getProjectMemberBundlesByMemberId(int memberId) {
-//        return projectMemberBundleRepository.findByMember_MemberId(memberId);
-//    }
-//
-//    public void deleteProject(int projectId, int memberId) {
-//        ProjectMemberBundlePk id = new ProjectMemberBundlePk(projectId, memberId);
-//        projectMemberBundleRepository.deleteById(id);
-//    }
+    private final ProjectMemberBundleRepository projectMemberBundleRepository;
+
+    private final MemberRepository memberRepository;
+
+    private final ProjectRepository projectRepository;
+
+    @Override
+    public List<MemberDto> selectAllProjectMemberBundleByTitle(String projectTitle) {
+
+        Project projectByTitle = projectRepository.findByProjectTitle(projectTitle);
+
+        if (Objects.isNull(projectByTitle))
+            throw new NotFoundProjectException(projectTitle);
+
+        List<ProjectMemberBundle> bundles = projectMemberBundleRepository.findByProject_ProjectId(projectByTitle.getProjectId());
+
+        if (bundles.isEmpty())
+            throw new NotFoundProjectMemberBundleException();
+
+        return bundles.stream()
+                .map(ProjectMemberBundle::getMember)
+                .map(MemberServiceImpl::convertToDto)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<ProjectDto> selectAllProjectBundleByEmail(String memberEmail) {
+
+        Member memberByEmail = memberRepository.findByMemberEmail(memberEmail);
+
+        if (Objects.isNull(memberByEmail))
+            throw new NotFoundMemberException(memberEmail);
+
+        List<ProjectMemberBundle> bundles = projectMemberBundleRepository.findByMember_MemberEmail(memberByEmail.getMemberEmail());
+
+        if (Objects.isNull(bundles))
+            throw new NotFoundProjectMemberBundleException();
+
+        return bundles.stream()
+                .map(ProjectMemberBundle::getProject)
+                .map(ProjectServiceImpl::convertToDto)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public ProjectMemberBundleDto createProjectMemberBundle(Integer projectId, Integer memberId) {
+
+        Project project = projectRepository.findByProjectId(projectId);
+        Member member = memberRepository.findByMemberId(memberId);
+
+        if (Objects.isNull(project))
+            throw new NotFoundProjectException(projectId);
+
+        if (Objects.isNull(member))
+            throw new NotFoundMemberException(memberId);
+
+        ProjectMemberBundle bundle  = new ProjectMemberBundle();
+        bundle.setMember(member);
+        bundle.setProject(project);
+        bundle.setRegisterTime(LocalDateTime.now());
+
+        projectMemberBundleRepository.saveAndFlush(bundle);
+
+        return convertToDto(bundle);
+    }
+
+    @Override
+    public void deleteProjectMemberBundle(Integer deleteProjectId, Integer deleteMemberId) {
+        ProjectMemberBundle bundle = projectMemberBundleRepository
+                .findByPMpk_ProjectIdAndPMpk_MemberId(deleteProjectId, deleteMemberId);
+
+        if (Objects.isNull(bundle))
+            throw new NotFoundProjectMemberBundleException();
+
+        projectMemberBundleRepository.deleteById(bundle.getPMpk());
+    }
+
+    public static ProjectMemberBundleDto convertToDto(ProjectMemberBundle bundle) {
+        return new ProjectMemberBundleDto(bundle.getPMpk().getProjectId(), bundle.getPMpk().getMemberId(),
+                bundle.getProject().getProjectTitle(), bundle.getMember().getMemberEmail());
+    }
+
 }
