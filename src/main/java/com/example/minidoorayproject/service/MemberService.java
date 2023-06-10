@@ -1,11 +1,28 @@
 package com.example.minidoorayproject.service;
 
-import com.example.minidoorayproject.repository.MemberRepository;
+import com.example.minidoorayproject.entity.Member;
+import org.springframework.stereotype.Service;
 
-public class MemberService {
-  private final MemberRepository memberRepository;
 
-  public MemberService(MemberRepository memberRepository) {
-    this.memberRepository = memberRepository;
+
+import com.example.minidoorayproject.domain.MemberDto;
+
+
+import java.util.List;
+
+  @Service
+  public interface MemberService {
+   MemberDto selectAllMemberBy(String memberId);
+
+    MemberDto  createMember(Member member);
+
+    MemberDto  getMember(int id);
+
+    MemberDto getMember(String email);
+
+    MemberDto updateMember(int id, Member member);
+
+    void deleteMember(int id);
   }
-}
+
+

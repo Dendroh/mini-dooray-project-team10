@@ -1,0 +1,3 @@
+### project 조회
+GET http://localhost:9091/projects/1
+Content-Type: application/json
