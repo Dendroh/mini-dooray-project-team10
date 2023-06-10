@@ -23,10 +23,12 @@ public class ProjectMemberBundle {
 
     @ManyToOne
     @JoinColumn(name = "project_id")
+    @MapsId(value = "projectId")
     private Project project;
 
     @ManyToOne
     @JoinColumn(name = "member_id")
+    @MapsId(value = "memberId")
     private Member member;
 
     public void setProject(Project project) {

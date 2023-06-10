@@ -17,13 +17,10 @@ import java.io.Serializable;
 @Embeddable
 public class TaskMileStoneBundlePk implements Serializable {
 
-    @ManyToOne
-    @JoinColumn(name = "milestone_id")
-    private Milestone milestone;
+    @Column(name = "task_id")
+    private Integer taskId;
 
-
-    @ManyToOne
-    @JoinColumn(name = "task_id")
-    private Task task;
+    @Column(name = "milestone_id")
+    private Integer milestoneId;
 
 }

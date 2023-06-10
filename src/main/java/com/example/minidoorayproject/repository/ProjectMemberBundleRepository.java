@@ -11,15 +11,10 @@ import java.util.List;
 
 @Repository
 public interface ProjectMemberBundleRepository extends JpaRepository<ProjectMemberBundle, ProjectMemberBundlePk> {
-    List<ProjectMemberBundle> findByProject_ProjectTitle(String title);
 
     List<ProjectMemberBundle> findByMember_MemberEmail(String email);
 
     List<ProjectMemberBundle> findByProject_ProjectId(Integer projectId);
-
-    List<ProjectMemberBundle> findByMember_MemberId(Integer memberId);
-
-    ProjectMemberBundle findByMember_MemberEmailAndProject_ProjectTitle(String memberEmail, String projectTitle);
 
     ProjectMemberBundle findByPMpk_ProjectIdAndPMpk_MemberId(Integer projectId, Integer memberId);
 

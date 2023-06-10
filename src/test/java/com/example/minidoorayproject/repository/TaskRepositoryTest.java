@@ -18,7 +18,6 @@ import java.util.List;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
-@ExtendWith(SpringExtension.class)
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @DataJpaTest
 class TaskRepositoryTest {
@@ -34,22 +33,23 @@ class TaskRepositoryTest {
     @BeforeEach
     void setup(){
         Member writer = new Member();
-        writer.setMemberId(1);
+        writer.setMemberId(100);
         writer.setMemberName("testUser");
         writer.setMemberEmail("testUser@gmail.com");
-        entityManager.persist(writer);
+        entityManager.persistAndFlush(writer);
 
 
         StatusCode statusCode = new StatusCode();
-        statusCode.setCodeId(1);
+        statusCode.setCodeId(100);
         statusCode.setCodeName("Run");
-        entityManager.persist(statusCode);
+        entityManager.persistAndFlush(statusCode);
 
         Project project = new Project();
+        project.setProjectId(100);
         project.setProjectTitle("Test Project");
         project.setAdmin(writer);
         project.setProjectStatus(statusCode);
-        entityManager.persist(project);
+        entityManager.persistAndFlush(project);
 
         task = new Task();
         task.setTaskName("testTask");

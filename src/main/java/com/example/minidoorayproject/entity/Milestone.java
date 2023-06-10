@@ -15,7 +15,6 @@ import java.time.LocalDateTime;
 public class Milestone {
     @Id
     @Column(name = "milestone_id")
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private int milestoneId;
 
     @Column(name = "milestone_name")

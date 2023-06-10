@@ -30,18 +30,18 @@ public class ProjectRepositoryTest {
     @BeforeEach
     public void setUp() {
         StatusCode statusCode = new StatusCode();
-        statusCode.setCodeId(11);
+        statusCode.setCodeId(110);
         statusCode.setCodeName("In Progress");
-        entityManager.persist(statusCode);
+        entityManager.persistAndFlush(statusCode);
 
         Member admin = new Member();
-        admin.setMemberId(11);
+        admin.setMemberId(110);
         admin.setMemberName("Admin Name");
         admin.setMemberEmail("admin@example.com");
-        entityManager.persist(admin);
+        entityManager.persistAndFlush(admin);
 
         project = new Project();
-        project.setProjectId(11);
+        project.setProjectId(110);
         project.setProjectTitle("Project 1");
         project.setProjectStatus(statusCode);
         project.setAdmin(admin);

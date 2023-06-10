@@ -5,10 +5,7 @@ import com.example.minidoorayproject.entity.Tag;
 import com.example.minidoorayproject.entity.Task;
 import lombok.*;
 
-import javax.persistence.Embeddable;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.io.Serializable;
 
 @Getter
@@ -19,15 +16,10 @@ import java.io.Serializable;
 @Embeddable
 public class TaskTagBundlePk implements Serializable {
 
+    @Column(name = "task_id")
+    private Integer taskId;
 
-    @ManyToOne
-    @JoinColumn(name = "task_id")
-    private Task task;
-
-
-
-    @ManyToOne
-    @JoinColumn(name = "tag_id")
-    private Tag tag;
+    @Column(name = "tag_id")
+    private Integer tagId;
 
 }

@@ -30,7 +30,7 @@ public class MemberRepositoryTest {
     public void testSaveAndFindById() {
         // given
         Member member = new Member();
-        member.setMemberId(21);
+        member.setMemberId(200);
         member.setMemberName("testUser");
         member.setMemberEmail("testUser@gmail.com");
 
