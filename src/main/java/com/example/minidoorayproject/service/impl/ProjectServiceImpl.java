@@ -170,8 +170,9 @@ public class ProjectServiceImpl implements ProjectService {
         ProjectResp resp = new ProjectResp();
         resp.setProjectId(project.getProjectId());
         resp.setProjectTitle(project.getProjectTitle());
-        resp.setCodeName(resp.getCodeName());
-        resp.setAdminEmail(resp.getAdminEmail());
+        resp.setCodeName(project.getProjectStatus().getCodeName());
+        resp.setAdminEmail(project.getAdmin().getMemberEmail());
+        resp.setAdminName(project.getAdmin().getMemberName());
 
         return resp;
     }

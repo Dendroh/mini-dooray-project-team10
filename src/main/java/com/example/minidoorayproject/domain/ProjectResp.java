@@ -13,4 +13,6 @@ public class ProjectResp {
     private String codeName;
 
     private String adminEmail;
+
+    private String adminName;
 }

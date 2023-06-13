@@ -129,3 +129,11 @@ Content-Type: application/json
 
 DELETE /projects/members/Project 1/example4@gmail.com
 Host: localhost:8082
+###
+
+# task API
+
+#
+
+GET /task/1
+Host: localhost:8082

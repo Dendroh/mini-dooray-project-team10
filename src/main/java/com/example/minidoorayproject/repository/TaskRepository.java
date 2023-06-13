@@ -1,5 +1,6 @@
 package com.example.minidoorayproject.repository;
 
+import com.example.minidoorayproject.domain.TaskDto;
 import com.example.minidoorayproject.entity.Task;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -13,5 +14,7 @@ public interface TaskRepository extends JpaRepository<Task, Integer> {
     List<Task> findByTaskId(Integer id);
 
     List<Task> findByProject_ProjectId(Integer id);
+
+    List<TaskDto> getByProject_ProjectId(Integer projectId);
 
 }
