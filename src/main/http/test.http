@@ -116,6 +116,10 @@ Host: localhost:8082
 
 ###
 
+GET /projects/members/id/1
+Host: localhost:8082
+###
+
 POST /projects/members
 Host: localhost:8082
 Content-Type: application/json

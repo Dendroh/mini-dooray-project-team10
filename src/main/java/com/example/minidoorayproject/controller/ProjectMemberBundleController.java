@@ -16,6 +16,11 @@ import java.util.List;
 public class ProjectMemberBundleController {
     private final ProjectMemberBundleService service;
 
+    @GetMapping("/projects/members/id/{projectId}")
+    public List<MemberDto> selectAllMemberByProjectId(@PathVariable("projectId") Integer projectId) {
+        return service.selectAllMemberByProjectId(projectId);
+    }
+
     @GetMapping("/projects/members/{projectTitle}")
     public List<MemberDto> getMembersByProjectTitle(@PathVariable("projectTitle") String projectTitle) {
         return service.selectAllProjectMemberBundleByTitle(projectTitle);

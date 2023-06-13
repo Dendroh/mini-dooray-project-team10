@@ -22,4 +22,5 @@ public class TaskDtoResp {
 
     private String writerEmail;
 
+    private Integer projectId;
 }

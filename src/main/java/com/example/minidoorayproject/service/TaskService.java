@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface TaskService {
     List<TaskDtoResp> getTasksByProjectId(Integer projectId);
+
+    List<TaskDtoResp> getTasksByMemberEmail(String email);
 }

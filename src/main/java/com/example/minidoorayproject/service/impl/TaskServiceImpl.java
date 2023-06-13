@@ -56,6 +56,11 @@ public class TaskServiceImpl implements TaskService {
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public List<TaskDtoResp> getTasksByMemberEmail(String email) {
+        return null;
+    }
+
     public static TaskDtoResp convertToResp(TaskDto taskDto) {
         TaskDtoResp resp = new TaskDtoResp();
         resp.setTaskId(taskDto.getTaskId());

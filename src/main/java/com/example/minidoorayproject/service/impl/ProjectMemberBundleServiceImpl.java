@@ -33,6 +33,21 @@ public class ProjectMemberBundleServiceImpl implements ProjectMemberBundleServic
     private final ProjectRepository projectRepository;
 
     @Override
+    public List<MemberDto> selectAllMemberByProjectId(Integer projectId) {
+        Project project = projectRepository.findByProjectId(projectId);
+
+        if (Objects.isNull(project))
+            throw new NotFoundProjectException(projectId);
+
+        List<ProjectMemberBundle> bundle = projectMemberBundleRepository.findByProject_ProjectId(project.getProjectId());
+
+        return bundle.stream()
+                .map(ProjectMemberBundle::getMember)
+                .map(MemberServiceImpl::convertToDto)
+                .collect(Collectors.toList());
+    }
+
+    @Override
     public List<MemberDto> selectAllProjectMemberBundleByTitle(String projectTitle) {
 
         Project projectByTitle = projectRepository.findByProjectTitle(projectTitle);

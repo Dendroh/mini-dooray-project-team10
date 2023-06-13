@@ -11,6 +11,7 @@ import java.util.List;
 @Service
 public interface ProjectMemberBundleService {
 
+    List<MemberDto> selectAllMemberByProjectId(Integer projectId);
 
     List<MemberDto> selectAllProjectMemberBundleByTitle(String projectTitle);
 
