@@ -50,7 +50,6 @@ DELETE /projects/title/민트초코 불매단 유예 대형 플젝
 Host: localhost:8082
 
 
-
 ###
 # member API
 
@@ -62,8 +61,8 @@ Host: localhost:8082
 ###
 
 
-# member api.2 /members/
-# : MemberPostReq(memberName, memberEmail)로 단일 member 추가
+# member api.2 - POST /members/
+# : MemberPostReq(memberName(notBlank), memberEmail(notBlank))로 단일 member 추가
 
 POST /members/
 Host: localhost:8082
@@ -71,13 +70,40 @@ Content-Type: application/json
 
 {
   "memberName": "민초 불매단1",
-  "memberEmail": "example8@gmail.com"
+  "memberEmail": "noMincho@gmail.com"
 }
 ###
 
+# member api.3 - PUT /members/
+# : MemberUpdateReq(email(기준 이메일), newName, newEmail - 전부 notBlank)로 단일 member 수정
+
+PUT /members/
+Host: localhost:8082
+Content-Type: application/json
+
+{
+  "email": "example3@gmail.com",
+  "newName": "name3333",
+  "newEmail": "example3333@gmail.com"
+}
+###
+
+# member api.4 - DELETE /members/email/{email}
+# : email로 단일 member 삭제
+
+DELETE /members/email/noMincho@gmail.com
+Host: localhost:8082
+###
+
+
+
+# task API
+
+# task api.1 - GET
 
 
 ###
+
 # projectMemberBundle API
 
 GET /projects/members/Project 2

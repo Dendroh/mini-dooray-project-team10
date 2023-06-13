@@ -2,6 +2,7 @@ package com.example.minidoorayproject.service.impl;
 
 import com.example.minidoorayproject.domain.MemberDto;
 import com.example.minidoorayproject.domain.MemberPostReq;
+import com.example.minidoorayproject.domain.MemberUpdateReq;
 import com.example.minidoorayproject.entity.Member;
 import com.example.minidoorayproject.exception.NotFoundMemberException;
 import com.example.minidoorayproject.exception.ResourceNotFoundException;
@@ -74,11 +75,35 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
+    public MemberDto updateMemberByDto(MemberUpdateReq updateReq) {
+        Member member = memberRepository.findByMemberEmail(updateReq.getEmail());
+
+        if (Objects.isNull(member))
+            throw new NotFoundMemberException(updateReq.getEmail());
+
+        MemberDto memberDto = convertToDto(member);
+        memberDto.setMemberEmail(updateReq.getNewEmail());
+        memberDto.setMemberName(updateReq.getNewName());
+
+        return convertToDto(memberRepository.updateMemberByEmail(memberDto));
+    }
+
+    @Override
     public void deleteMember(int id) {
         if (!memberRepository.existsById(id)) {
             throw new ResourceNotFoundException("Member", "id", String.valueOf(id));
         }
         memberRepository.deleteById(id);
+    }
+
+    @Override
+    public void deleteMember(String email) {
+        Member member = memberRepository.findByMemberEmail(email);
+
+        if (Objects.isNull(member))
+            throw new NotFoundMemberException(email);
+
+        memberRepository.deleteById(member.getMemberId());
     }
 
     public static MemberDto convertToDto(Member member) {

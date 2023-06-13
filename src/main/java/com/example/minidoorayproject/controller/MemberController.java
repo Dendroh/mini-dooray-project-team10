@@ -2,11 +2,14 @@ package com.example.minidoorayproject.controller;
 
 import com.example.minidoorayproject.domain.MemberDto;
 import com.example.minidoorayproject.domain.MemberPostReq;
+import com.example.minidoorayproject.domain.MemberUpdateReq;
 import com.example.minidoorayproject.entity.Member;
+import com.example.minidoorayproject.exception.ValidationFailedException;
 import com.example.minidoorayproject.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -41,15 +44,23 @@ public class MemberController {
         return ResponseEntity.ok(memberDto);
     }
 
-//    @PutMapping("/")
-//    public MemberDto updateMemberByDto() {
-//
-//    }
+    @PutMapping("/")
+    public MemberDto updateMemberByDto(@Valid @RequestBody MemberUpdateReq updateReq, BindingResult result) {
+        if (result.hasErrors())
+            throw new ValidationFailedException(result);
+
+        return memberService.updateMemberByDto(updateReq);
+    }
 
     @PutMapping("/{id}")
     public ResponseEntity<MemberDto> updateMember(@PathVariable Integer id, @RequestBody Member member) {
         MemberDto updatedMember = memberService.updateMember(id, member);
         return ResponseEntity.ok(updatedMember);
+    }
+
+    @DeleteMapping("/email/{email}")
+    public void deleteMemberByEmail(@PathVariable("email") String email) {
+        memberService.deleteMember(email);
     }
 
     @DeleteMapping("/{id}")
