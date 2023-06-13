@@ -10,6 +10,7 @@ import com.example.minidoorayproject.repository.MemberRepository;
 import com.example.minidoorayproject.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Objects;
 
@@ -65,6 +66,7 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
+    @Transactional
     public MemberDto updateMember(int id, Member member) {
         Member existingMember = memberRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Member", "id", String.valueOf(id)));
@@ -75,6 +77,7 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
+    @Transactional
     public MemberDto updateMemberByDto(MemberUpdateReq updateReq) {
         Member member = memberRepository.findByMemberEmail(updateReq.getEmail());
 
@@ -85,10 +88,13 @@ public class MemberServiceImpl implements MemberService {
         memberDto.setMemberEmail(updateReq.getNewEmail());
         memberDto.setMemberName(updateReq.getNewName());
 
-        return convertToDto(memberRepository.updateMemberByEmail(memberDto));
+        memberRepository.updateMemberByDto(memberDto);
+
+        return memberDto;
     }
 
     @Override
+    @Transactional
     public void deleteMember(int id) {
         if (!memberRepository.existsById(id)) {
             throw new ResourceNotFoundException("Member", "id", String.valueOf(id));
@@ -97,6 +103,7 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
+    @Transactional
     public void deleteMember(String email) {
         Member member = memberRepository.findByMemberEmail(email);
 

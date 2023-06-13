@@ -82,7 +82,7 @@ Host: localhost:8082
 Content-Type: application/json
 
 {
-  "email": "example3@gmail.com",
+  "email": "noMincho@gmail.com",
   "newName": "name3333",
   "newEmail": "example3333@gmail.com"
 }
@@ -91,7 +91,7 @@ Content-Type: application/json
 # member api.4 - DELETE /members/email/{email}
 # : email로 단일 member 삭제
 
-DELETE /members/email/noMincho@gmail.com
+DELETE /members/email/example3333@gmail.com
 Host: localhost:8082
 ###
 

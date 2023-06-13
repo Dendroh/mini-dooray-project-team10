@@ -6,5 +6,5 @@ import org.springframework.data.repository.NoRepositoryBean;
 
 @NoRepositoryBean
 public interface MemberRepositoryCustom {
-    Member updateMemberByEmail(MemberDto memberDto);
+    Member updateMemberByDto(MemberDto memberDto);
 }

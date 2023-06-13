@@ -12,7 +12,7 @@ public class MemberRepositoryImpl extends QuerydslRepositorySupport implements M
     }
 
     @Override
-    public Member updateMemberByEmail(MemberDto memberDto) {
+    public Member updateMemberByDto(MemberDto memberDto) {
         QMember member = QMember.member;
 
         update(member)
