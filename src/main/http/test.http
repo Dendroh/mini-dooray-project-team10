@@ -153,6 +153,11 @@ GET /task/memberEmail/example1@gmail.com
 Host: localhost:8082
 ###
 
+GET /task/id/2
+Host: localhost:8082
+
+###
+
 POST /task/
 Host: localhost:8082
 Content-Type: application/json
@@ -163,3 +168,5 @@ Content-Type: application/json
   "projectId": 1,
   "writerEmail": "example1@gmail.com"
 }
+###
+

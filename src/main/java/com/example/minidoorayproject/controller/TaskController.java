@@ -20,6 +20,11 @@ public class TaskController {
         return service.getTasksByProjectId(projectId);
     }
 
+    @GetMapping("/task/id/{taskId}")
+    public TaskDtoResp getTaskByTaskId(@PathVariable("taskId") Integer taskId) {
+        return service.getTaskByTaskId(taskId);
+    }
+
     @GetMapping("/task/memberEmail/{email}")
     public List<TaskDtoResp> getTaskByMemberEmail(@PathVariable("email") String email) {
         return service.getTasksByMemberEmail(email);

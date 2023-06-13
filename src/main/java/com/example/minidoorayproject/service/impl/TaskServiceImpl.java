@@ -8,6 +8,7 @@ import com.example.minidoorayproject.entity.Project;
 import com.example.minidoorayproject.entity.ProjectMemberBundle;
 import com.example.minidoorayproject.entity.Task;
 import com.example.minidoorayproject.exception.NotFoundMemberException;
+import com.example.minidoorayproject.exception.NotFoundTaskById;
 import com.example.minidoorayproject.exception.ResourceNotFoundException;
 import com.example.minidoorayproject.repository.MemberRepository;
 import com.example.minidoorayproject.repository.ProjectMemberBundleRepository;
@@ -92,6 +93,15 @@ public class TaskServiceImpl implements TaskService {
         return tasks.stream()
                 .map(TaskServiceImpl::convertToResp)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public TaskDtoResp getTaskByTaskId(Integer taskId) {
+        Task taskBuId = taskRepository.findById(taskId).orElseThrow(() -> {
+            throw new NotFoundTaskById(taskId);
+        });
+
+        return convertToResp(taskBuId);
     }
 
     @Override

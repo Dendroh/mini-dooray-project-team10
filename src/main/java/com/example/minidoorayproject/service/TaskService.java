@@ -10,5 +10,7 @@ public interface TaskService {
 
     List<TaskDtoResp> getTasksByMemberEmail(String email);
 
+    TaskDtoResp getTaskByTaskId(Integer taskId);
+
     TaskDtoResp createTaskByDto(TaskPostReq postReq);
 }
