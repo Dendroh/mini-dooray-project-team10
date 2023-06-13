@@ -1,7 +1,9 @@
 package com.example.minidoorayproject.service.impl;
 
 import com.example.minidoorayproject.domain.MemberDto;
+import com.example.minidoorayproject.domain.MemberPostReq;
 import com.example.minidoorayproject.entity.Member;
+import com.example.minidoorayproject.exception.NotFoundMemberException;
 import com.example.minidoorayproject.exception.ResourceNotFoundException;
 import com.example.minidoorayproject.repository.MemberRepository;
 import com.example.minidoorayproject.service.MemberService;
@@ -32,6 +34,19 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
+    public MemberDto createMemberByDto(MemberPostReq postReq) {
+        MemberDto memberDto = memberRepository.getByMemberEmail(postReq.getMemberEmail());
+
+        if (Objects.isNull(memberDto)) {
+            MemberDto memberDtoByPost = new MemberDto(null, postReq.getMemberName(), postReq.getMemberEmail());
+            return convertToDto(memberRepository.saveAndFlush(convertToEntity(memberDtoByPost)));
+        }
+
+        else
+            return null;
+    }
+
+    @Override
     public MemberDto getMember(int id) {
         Member member = memberRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Member", "id", String.valueOf(id)));
@@ -43,7 +58,7 @@ public class MemberServiceImpl implements MemberService {
         Member member = memberRepository.findByMemberEmail(email);
 
         if(Objects.isNull(member)){
-            new ResourceNotFoundException("Member", "email", String.valueOf(email));
+            throw new NotFoundMemberException(email);
         }
         return convertToDto(member);
     }
@@ -68,5 +83,13 @@ public class MemberServiceImpl implements MemberService {
 
     public static MemberDto convertToDto(Member member) {
         return new MemberDto(member.getMemberId(), member.getMemberName(), member.getMemberEmail());
+    }
+
+    public static Member convertToEntity(MemberDto memberDto) {
+        Member member = new Member();
+        member.setMemberEmail(memberDto.getMemberEmail());
+        member.setMemberName(memberDto.getMemberName());
+
+        return member;
     }
 }

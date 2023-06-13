@@ -1,4 +1,4 @@
-package com.example.minidoorayproject.service;
+package com.example.minidoorayproject.service.impl;
 
 import com.example.minidoorayproject.entity.TaskTagBundle;
 import com.example.minidoorayproject.exception.ResourceNotFoundException;
@@ -7,12 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class TaskTagBundleService {
+public class TaskTagBundleServiceImpl {
 
     private final TaskTagBundleRepository taskTagBundleRepository;
 
     @Autowired
-    public TaskTagBundleService(TaskTagBundleRepository taskTagBundleRepository) {
+    public TaskTagBundleServiceImpl(TaskTagBundleRepository taskTagBundleRepository) {
         this.taskTagBundleRepository = taskTagBundleRepository;
     }
 

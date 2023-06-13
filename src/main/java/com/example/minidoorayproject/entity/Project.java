@@ -13,20 +13,19 @@ import javax.persistence.*;
 @NoArgsConstructor
 public class Project {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "project_id")
-    private int projectId;
+    private Integer projectId;
 
     @Column(name = "project_title")
     private String projectTitle;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "project_status_code_id", referencedColumnName = "code_id")
     private StatusCode projectStatus;
 
     @ManyToOne
     @JoinColumn(name = "admin_id", referencedColumnName = "member_id")
     private Member admin;
-
-
 
 }

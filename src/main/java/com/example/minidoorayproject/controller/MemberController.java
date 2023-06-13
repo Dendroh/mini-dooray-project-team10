@@ -1,6 +1,7 @@
 package com.example.minidoorayproject.controller;
 
 import com.example.minidoorayproject.domain.MemberDto;
+import com.example.minidoorayproject.domain.MemberPostReq;
 import com.example.minidoorayproject.entity.Member;
 import com.example.minidoorayproject.service.MemberService;
 import lombok.RequiredArgsConstructor;
@@ -8,18 +9,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RestController
-@RequestMapping("/dooray/project/member")
+@RequestMapping("/members")
 @RequiredArgsConstructor
 public class MemberController {
 
     private final MemberService memberService;
-
-//    @GetMapping("/{memberId}")
-//    public ResponseEntity<MemberDto> getAllMembers(@PathVariable String memberId) {
-//        MemberDto memberDto = memberService.selectAllMemberBy(memberId);
-//        return ResponseEntity.ok(memberDto);
-//    }
 
     @PostMapping
     public ResponseEntity<MemberDto> createMember(@RequestBody Member member) {
@@ -27,8 +24,13 @@ public class MemberController {
         return ResponseEntity.status(HttpStatus.CREATED).body(createdMember);
     }
 
+    @PostMapping("/")
+    public MemberDto createMemberByDto(@Valid @RequestBody MemberPostReq postReq) {
+        return memberService.createMemberByDto(postReq);
+    }
+
     @GetMapping("/{id}")
-    public ResponseEntity<MemberDto> getMember(@PathVariable int id) {
+    public ResponseEntity<MemberDto> getMember(@PathVariable Integer id) {
         MemberDto memberDto = memberService.getMember(id);
         return ResponseEntity.ok(memberDto);
     }
@@ -39,14 +41,19 @@ public class MemberController {
         return ResponseEntity.ok(memberDto);
     }
 
+//    @PutMapping("/")
+//    public MemberDto updateMemberByDto() {
+//
+//    }
+
     @PutMapping("/{id}")
-    public ResponseEntity<MemberDto> updateMember(@PathVariable int id, @RequestBody Member member) {
+    public ResponseEntity<MemberDto> updateMember(@PathVariable Integer id, @RequestBody Member member) {
         MemberDto updatedMember = memberService.updateMember(id, member);
         return ResponseEntity.ok(updatedMember);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteMember(@PathVariable int id) {
+    public ResponseEntity<Void> deleteMember(@PathVariable Integer id) {
         memberService.deleteMember(id);
         return ResponseEntity.noContent().build();
     }

@@ -10,6 +10,8 @@ import java.util.List;
 @Repository
 public interface TaskRepository extends JpaRepository<Task, Integer> {
 
-    List<Task> findByTaskId(int id);
+    List<Task> findByTaskId(Integer id);
+
+    List<Task> findByProject_ProjectId(Integer id);
 
 }

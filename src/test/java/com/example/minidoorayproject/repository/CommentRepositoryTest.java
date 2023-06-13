@@ -34,25 +34,21 @@ class CommentRepositoryTest {
     void setUp(){
 
         Member writer = new Member();
-        writer.setMemberId(210);
         writer.setMemberName("testUser");
         writer.setMemberEmail("testUser@gmail.com");
         entityManager.persistAndFlush(writer);
 
         StatusCode statusCode = new StatusCode();
         statusCode.setCodeName("Run");
-        statusCode.setCodeId(210);
         entityManager.persistAndFlush(statusCode);
 
         Project project = new Project();
         project.setProjectStatus(statusCode);
         project.setProjectTitle("testProject");
         project.setAdmin(writer);
-        project.setProjectId(210);
         entityManager.persistAndFlush(project);
 
         Task task = new Task();
-        task.setTaskId(210);
         task.setTaskName("testTask");
         task.setContent("Test Content");
         task.setWriteTime(LocalDateTime.now());
@@ -61,7 +57,6 @@ class CommentRepositoryTest {
         entityManager.persistAndFlush(task);
 
         comment = new Comment();
-        comment.setCommentId(120);
         comment.setContent("testComment");
         comment.setWriteTime(LocalDateTime.now());
         comment.setWriter(writer);
@@ -139,25 +134,21 @@ class CommentRepositoryTest {
 
 
         Member writer = new Member();
-        writer.setMemberId(293);
         writer.setMemberName("testUser1");
         writer.setMemberEmail("testUser1@gmail.com");
         entityManager.persist(writer);
 
         StatusCode statusCode = new StatusCode();
         statusCode.setCodeName("Complete");
-        statusCode.setCodeId(282);
         entityManager.persist(statusCode);
 
         Project project = new Project();
         project.setProjectStatus(statusCode);
         project.setProjectTitle("testProject1");
         project.setAdmin(writer);
-        project.setProjectId(245);
         entityManager.persist(project);
 
         Task task = new Task();
-        task.setTaskId(290);
         task.setTaskName("testTask");
         task.setContent("Test Content");
         task.setWriteTime(LocalDateTime.now());
@@ -166,7 +157,6 @@ class CommentRepositoryTest {
         entityManager.persist(task);
 
         Comment comment1 = new Comment();
-        comment1.setCommentId(230);
         comment1.setContent("testComment");
         comment1.setWriteTime(LocalDateTime.now());
         comment1.setWriter(writer);

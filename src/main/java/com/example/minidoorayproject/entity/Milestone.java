@@ -1,6 +1,8 @@
 package com.example.minidoorayproject.entity;
 
 import lombok.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -14,8 +16,9 @@ import java.time.LocalDateTime;
 @Table(name = "milestone")
 public class Milestone {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "milestone_id")
-    private int milestoneId;
+    private Integer milestoneId;
 
     @Column(name = "milestone_name")
     private String milestoneName;
@@ -27,6 +30,7 @@ public class Milestone {
     private LocalDateTime endDatetime;
 
     @ManyToOne
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "project_id")
     private Project project;
 

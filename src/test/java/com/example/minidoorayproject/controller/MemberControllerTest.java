@@ -63,7 +63,7 @@ public class MemberControllerTest {
     public void testCreateMember() throws Exception {
         MemberDto memberDto = new MemberDto(1, "John", "john@example.com");
 
-        mockMvc.perform(post("/dooray/project/member")
+        mockMvc.perform(post("/members")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(memberDto)))
                 .andExpect(status().isCreated());
@@ -77,7 +77,7 @@ public class MemberControllerTest {
 
         given(memberService.getMember(memberId)).willReturn(memberDto);
 
-        mockMvc.perform(get("/dooray/project/member/{id}", memberId))
+        mockMvc.perform(get("/members/{id}", memberId))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.memberId").value(memberId))
                 .andExpect(jsonPath("$.memberName").value(memberDto.getMemberName()))
@@ -92,7 +92,7 @@ public class MemberControllerTest {
 
         given(memberService.getMember("john@example.com")).willReturn(memberDto);
 
-        mockMvc.perform(get("/dooray/project/member/email/{email}", "john@example.com"))
+        mockMvc.perform(get("/members/email/{email}", "john@example.com"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.memberId").value(memberId))
                 .andExpect(jsonPath("$.memberName").value(memberDto.getMemberName()))
@@ -112,7 +112,7 @@ public class MemberControllerTest {
         doReturn(updatedMemberDto).when(memberService).updateMember(eq(memberId), ArgumentMatchers.any());
 
 
-        mockMvc.perform(put("/dooray/project/member/{id}", memberId)
+        mockMvc.perform(put("/members/{id}", memberId)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(updatedMemberDto)))
                 .andExpect(status().isOk())
@@ -125,7 +125,7 @@ public class MemberControllerTest {
     public void testDeleteMember() throws Exception {
         int memberId = 1;
 
-        ResultActions resultActions = mockMvc.perform(delete("/dooray/project/member/{id}", memberId))
+        ResultActions resultActions = mockMvc.perform(delete("/members/{id}", memberId))
                 .andExpect(status().isNoContent());
 
         verify(memberService).deleteMember(memberId);

@@ -4,6 +4,8 @@ package com.example.minidoorayproject.entity;
 import com.example.minidoorayproject.entity.compositekey.TaskMileStoneBundlePk;
 import com.example.minidoorayproject.entity.compositekey.TaskTagBundlePk;
 import lombok.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 
@@ -19,11 +21,13 @@ public class TaskTagBundle {
     private TaskTagBundlePk TTpk;
 
     @ManyToOne
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @MapsId(value = "taskId")
     @JoinColumn(name = "task_id")
     private Task task;
 
     @ManyToOne
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @MapsId(value = "tagId")
     @JoinColumn(name = "tag_id")
     private Tag tag;

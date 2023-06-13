@@ -2,6 +2,8 @@ package com.example.minidoorayproject.entity;
 
 import com.example.minidoorayproject.entity.compositekey.ProjectMemberBundlePk;
 import lombok.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -23,11 +25,13 @@ public class ProjectMemberBundle {
 
     @ManyToOne
     @JoinColumn(name = "project_id")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @MapsId(value = "projectId")
     private Project project;
 
     @ManyToOne
     @JoinColumn(name = "member_id")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @MapsId(value = "memberId")
     private Member member;
 

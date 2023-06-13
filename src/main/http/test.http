@@ -2,6 +2,80 @@
 GET /projects/1
 Host: localhost:8082
 
+###
+## project API
+
+# project api.1 - GET /projects/account/email/{adminEmail}
+# : adminEmail로 다수 project 조회
+
+GET /projects/account/email/example3@gmail.com
+Host: localhost:8082
+###
+
+
+# project api.2 - POST /projects/
+# : ProjectPostReq(projectTitle, adminEmail)로 단일 project 추가
+# <project 생성 루트 : member 추가 --adminEmail-->>   project 추가(현재)  --(projectId, adminEmail)-->>  project_member_bundle 추가 순으로 진행 바람>
+
+POST /projects/
+Host: localhost:8082
+Content-Type: application/json
+
+{
+  "projectTitle": "민트초코 불매단 플젝",
+  "adminEmail": "example2@gmail.com"
+}
+###
+
+
+# project api.3 - PUT /projects/
+# : ProjectUpdateReq(projectTitle, newProjectTitle, newStatusName)로 단일 project 수정
+
+PUT /projects/
+Host: localhost:8082
+Content-Type: application/json
+
+{
+  "projectTitle": "민트초코 불매단 플젝",
+  "newProjectTitle" : "민트초코 불매단 유예 대형 플젝",
+  "newStatusName": "Inactive"
+}
+###
+
+
+# project api.4 - DELETE /projects/title/{title}
+# : title로 단일 project 삭제
+
+DELETE /projects/title/민트초코 불매단 유예 대형 플젝
+Host: localhost:8082
+
+
+
+###
+# member API
+
+# member api.1 - GET /members/email/{email}
+# : email로 단일 member 조회
+
+GET /members/email/example5@gmail.com
+Host: localhost:8082
+###
+
+
+# member api.2 /members/
+# : MemberPostReq(memberName, memberEmail)로 단일 member 추가
+
+POST /members/
+Host: localhost:8082
+Content-Type: application/json
+
+{
+  "memberName": "민초 불매단1",
+  "memberEmail": "example8@gmail.com"
+}
+###
+
+
 
 ###
 # projectMemberBundle API

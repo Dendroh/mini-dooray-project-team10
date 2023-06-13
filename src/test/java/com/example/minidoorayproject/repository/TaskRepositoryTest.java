@@ -33,19 +33,15 @@ class TaskRepositoryTest {
     @BeforeEach
     void setup(){
         Member writer = new Member();
-        writer.setMemberId(100);
         writer.setMemberName("testUser");
         writer.setMemberEmail("testUser@gmail.com");
         entityManager.persistAndFlush(writer);
 
-
         StatusCode statusCode = new StatusCode();
-        statusCode.setCodeId(100);
         statusCode.setCodeName("Run");
         entityManager.persistAndFlush(statusCode);
 
         Project project = new Project();
-        project.setProjectId(100);
         project.setProjectTitle("Test Project");
         project.setAdmin(writer);
         project.setProjectStatus(statusCode);
@@ -61,8 +57,6 @@ class TaskRepositoryTest {
 
     @Test
     public void testSaveAndFindById() {
-
-
 
         Task savedTask = taskRepository.saveAndFlush(task);
 
@@ -95,9 +89,8 @@ class TaskRepositoryTest {
     }
 
     @Test
-    public void testDelete() {
+    void testDelete() {
         // given
-
 
         Task savedTask = taskRepository.save(task);
 
@@ -108,7 +101,7 @@ class TaskRepositoryTest {
         List<Task> found = taskRepository.findByTaskId(savedTask.getTaskId());
 
         // then
-        assertThat(found).isNotEmpty();
+        assertThat(found).isEmpty();
 
     }
 }

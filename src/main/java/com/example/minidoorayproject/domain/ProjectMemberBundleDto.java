@@ -13,9 +13,9 @@ import javax.validation.constraints.NotNull;
 @JsonInclude(value = JsonInclude.Include.NON_NULL)
 @AllArgsConstructor
 public class ProjectMemberBundleDto {
-    private int projectId;
+    private Integer projectId;
 
-    private int memberId;
+    private Integer memberId;
 
     private String projectTitle;
 

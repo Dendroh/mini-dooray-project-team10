@@ -9,5 +9,8 @@ import java.util.List;
 
 public interface StatusCodeRepository extends JpaRepository<StatusCode, Integer> {
 
-    List<StatusCode> findByCodeId(Integer id);
+    StatusCode findByCodeId(Integer codeId);
+
+    StatusCode findByCodeName(String codeName);
+
 }

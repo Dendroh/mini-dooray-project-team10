@@ -1,10 +1,7 @@
 package com.example.minidoorayproject.advice;
 
 import com.example.minidoorayproject.domain.ExceptionRequest;
-import com.example.minidoorayproject.exception.NotFoundMemberException;
-import com.example.minidoorayproject.exception.NotFoundProjectException;
-import com.example.minidoorayproject.exception.NotFoundProjectMemberBundleException;
-import com.example.minidoorayproject.exception.ValidationFailedException;
+import com.example.minidoorayproject.exception.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -28,7 +25,7 @@ public class RestControllerAdvice {
     }
 
     @ExceptionHandler(value = {NotFoundMemberException.class, NotFoundProjectException.class,
-            NotFoundProjectMemberBundleException.class})
+            NotFoundProjectMemberBundleException.class, NotFoundStatusCodeException.class})
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ResponseBody
     public ExceptionRequest notFounds(Exception ig, HttpServletRequest req) {

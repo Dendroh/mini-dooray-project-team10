@@ -2,6 +2,8 @@ package com.example.minidoorayproject.entity;
 
 
 import lombok.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 
@@ -13,6 +15,7 @@ import javax.persistence.*;
 @Table(name = "tag")
 public class Tag {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "tag_id")
     private int tagId;
 
@@ -23,6 +26,7 @@ public class Tag {
     private String tagColor;
 
     @ManyToOne
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "project_id")
     private Project project;
 

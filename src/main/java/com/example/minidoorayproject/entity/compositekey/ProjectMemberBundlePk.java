@@ -19,10 +19,10 @@ import java.io.Serializable;
 public class ProjectMemberBundlePk implements Serializable {
 
     @Column(name = "project_id")
-    private int projectId;
+    private Integer projectId;
 
     @Column(name = "member_id")
-    private int memberId;
+    private Integer memberId;
 
 
 }

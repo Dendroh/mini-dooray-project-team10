@@ -18,7 +18,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class MileStoneDto {
     @NotNull
-    private int milestoneId;
+    private Integer milestoneId;
 
     private String milestoneName;
 
@@ -27,5 +27,5 @@ public class MileStoneDto {
     private LocalDateTime endDatetime;
 
     @NotNull
-    private int projectId;
+    private Integer projectId;
 }

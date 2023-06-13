@@ -15,13 +15,13 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor
 public class TagDto {
     @NotNull
-    private int tagId;
+    private Integer tagId;
 
     private String tagName;
 
     private String tagColor;
     @NotNull
-    private int projectId;
+    private Integer projectId;
 
 
 }

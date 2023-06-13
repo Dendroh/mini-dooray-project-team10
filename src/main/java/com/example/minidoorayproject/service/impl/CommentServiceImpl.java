@@ -1,4 +1,4 @@
-package com.example.minidoorayproject.service;
+package com.example.minidoorayproject.service.impl;
 
 import com.example.minidoorayproject.entity.Comment;
 import com.example.minidoorayproject.exception.ResourceNotFoundException;
@@ -7,12 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class CommentService {
+public class CommentServiceImpl {
 
     private final CommentRepository commentRepository;
 
     @Autowired
-    public CommentService(CommentRepository commentRepository) {
+    public CommentServiceImpl(CommentRepository commentRepository) {
         this.commentRepository = commentRepository;
     }
 

@@ -28,7 +28,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK)
 @AutoConfigureMockMvc
 @ExtendWith(MockitoExtension.class)
-public class ProjectControllerTest {
+class ProjectControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
@@ -45,7 +45,7 @@ public class ProjectControllerTest {
 //    }
 
     @Test
-    public void testCreateProject() throws Exception {
+    void testCreateProject() throws Exception {
 
         ProjectDto projectDto = new ProjectDto(11,"Project 11", 1, 10 );
 
@@ -62,7 +62,7 @@ public class ProjectControllerTest {
     }
 
     @Test
-    public void testGetProjectById() throws Exception {
+    void testGetProjectById() throws Exception {
         int projectId = 1;
         ProjectDto projectDto = new ProjectDto(projectId, "Project 1", 1, 10);
 
@@ -75,7 +75,7 @@ public class ProjectControllerTest {
     }
 
     @Test
-    public void testGetProjectsByAccount() throws Exception {
+    void testGetProjectsByAccount() throws Exception {
         String accountId = "1";
         mockMvc.perform(get("/projects/account/{accountId}", accountId)
                         .contentType(MediaType.APPLICATION_JSON))
@@ -83,7 +83,7 @@ public class ProjectControllerTest {
     }
 
     @Test
-    public void testUpdateProject() throws Exception {
+    void testUpdateProject() throws Exception {
         int projectId = 1;
         ProjectDto projectDto = new ProjectDto(projectId, "Updated Project", 1, 10);
 
@@ -99,7 +99,7 @@ public class ProjectControllerTest {
     }
 
     @Test
-    public void testDeleteProject() throws Exception {
+    void testDeleteProject() throws Exception {
         int projectId = 1;
         mockMvc.perform(delete("/projects/{id}", projectId)
                         .contentType(MediaType.APPLICATION_JSON))

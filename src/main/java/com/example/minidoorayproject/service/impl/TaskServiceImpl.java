@@ -1,4 +1,4 @@
-package com.example.minidoorayproject.service;
+package com.example.minidoorayproject.service.impl;
 
 import com.example.minidoorayproject.entity.Task;
 import com.example.minidoorayproject.exception.ResourceNotFoundException;
@@ -6,16 +6,13 @@ import com.example.minidoorayproject.repository.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
-
 @Service
-public class TaskService {
+public class TaskServiceImpl {
 
     private final TaskRepository taskRepository;
 
     @Autowired
-    public TaskService(TaskRepository taskRepository) {
+    public TaskServiceImpl(TaskRepository taskRepository) {
         this.taskRepository = taskRepository;
     }
 

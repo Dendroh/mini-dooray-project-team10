@@ -30,7 +30,6 @@ public class MemberRepositoryTest {
     public void testSaveAndFindById() {
         // given
         Member member = new Member();
-        member.setMemberId(200);
         member.setMemberName("testUser");
         member.setMemberEmail("testUser@gmail.com");
 
@@ -50,7 +49,6 @@ public class MemberRepositoryTest {
     public void testDeleteById() {
         // given
         Member member = new Member();
-        member.setMemberId(11);
         member.setMemberName("testUser");
         member.setMemberEmail("testUser@gmail.com");
 

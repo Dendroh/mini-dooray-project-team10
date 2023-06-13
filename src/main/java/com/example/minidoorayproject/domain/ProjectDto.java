@@ -11,12 +11,12 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor
 public class ProjectDto {
     @NotNull
-    private int projectId;
+    private Integer projectId;
     private String projectTitle;
     @NotNull
-    private int codeId;
+    private Integer codeId;
     @NotNull
-    private int adminId;
+    private Integer adminId;
 }
 
 

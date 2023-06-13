@@ -11,6 +11,6 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor
 public class StatusCodeDto {
     @NotNull
-    private int codeId;
+    private Integer codeId;
     private String statusName;
 }
