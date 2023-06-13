@@ -100,7 +100,7 @@ public class TaskServiceImpl implements TaskService {
         resp.setWriterEmail(taskDto.getWriter().getMemberEmail());
         resp.setWriteTime(taskDto.getWriteTime());
         resp.setWriterName(taskDto.getWriter().getMemberName());
-
+        resp.setProjectId(taskDto.getProject().getProjectId());
         return resp;
     }
 }
