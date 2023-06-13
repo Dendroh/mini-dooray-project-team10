@@ -151,3 +151,15 @@ Host: localhost:8082
 
 GET /task/memberEmail/example1@gmail.com
 Host: localhost:8082
+###
+
+POST /task/
+Host: localhost:8082
+Content-Type: application/json
+
+{
+  "taskName": "추가 테스크",
+  "content": "쓸 내용 없음",
+  "projectId": 1,
+  "writerEmail": "example1@gmail.com"
+}
