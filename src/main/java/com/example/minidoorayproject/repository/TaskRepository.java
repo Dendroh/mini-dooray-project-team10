@@ -17,4 +17,6 @@ public interface TaskRepository extends JpaRepository<Task, Integer> {
 
     List<TaskDto> getByProject_ProjectId(Integer projectId);
 
+    List<TaskDto> getByWriter_MemberEmail(String email);
+
 }

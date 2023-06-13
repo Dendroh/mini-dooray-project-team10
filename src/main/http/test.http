@@ -8,7 +8,7 @@ Host: localhost:8082
 # project api.1 - GET /projects/account/email/{adminEmail}
 # : adminEmail로 다수 project 조회
 
-GET /projects/account/email/example3@gmail.com
+GET /projects/account/email/example1@gmail.com
 Host: localhost:8082
 ###
 
@@ -145,4 +145,9 @@ Host: localhost:8082
 #
 
 GET /task/1
+Host: localhost:8082
+###
+
+
+GET /task/memberEmail/example1@gmail.com
 Host: localhost:8082
