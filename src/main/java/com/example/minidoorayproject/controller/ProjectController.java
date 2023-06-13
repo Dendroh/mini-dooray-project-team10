@@ -40,6 +40,11 @@ public class ProjectController {
         return ResponseEntity.ok(projectDto);
     }
 
+    @GetMapping("/id/{projectId}")
+    public ProjectResp getProjectById(@PathVariable("projectId") Integer projectId) {
+        return projectService.findProjectById(projectId);
+    }
+
     @GetMapping("/account/{accountId}")
     public ResponseEntity<List<ProjectDto>> getProjectsByAccount(@PathVariable String accountId) {
         List<ProjectDto> projects = projectService.selectAllProjectBy(accountId);

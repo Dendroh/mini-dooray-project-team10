@@ -79,6 +79,16 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
+    public ProjectResp findProjectById(Integer projectId) {
+        Project project = projectRepository.findByProjectId(projectId);
+
+        if (Objects.isNull(project))
+            throw new NotFoundProjectException(projectId);
+
+        return convertToResp(project);
+    }
+
+    @Override
     public List<ProjectResp> getProjectByAdminEmail(String email) {
         List<ProjectDtoImpl> projectDtoList = projectRepository.findByAdmin_MemberEmail(email);
 

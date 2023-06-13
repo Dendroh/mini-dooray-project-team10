@@ -12,6 +12,11 @@ GET /projects/account/email/example3@gmail.com
 Host: localhost:8082
 ###
 
+GET /projects/id/2
+Host: localhost:8082
+
+###
+
 
 # project api.2 - POST /projects/
 # : ProjectPostReq(projectTitle, adminEmail)로 단일 project 추가
