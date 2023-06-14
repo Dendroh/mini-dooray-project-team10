@@ -28,7 +28,10 @@ public class MemberController {
     }
 
     @PostMapping("/")
-    public MemberDto createMemberByDto(@Valid @RequestBody MemberPostReq postReq) {
+    public MemberDto createMemberByDto(@Valid @RequestBody MemberPostReq postReq, BindingResult result) {
+        if (result.hasErrors())
+            throw new ValidationFailedException(result);
+
         return memberService.createMemberByDto(postReq);
     }
 

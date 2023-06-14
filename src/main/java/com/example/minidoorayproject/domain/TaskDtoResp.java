@@ -2,6 +2,7 @@ package com.example.minidoorayproject.domain;
 
 import com.example.minidoorayproject.entity.Member;
 import com.example.minidoorayproject.entity.Project;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 

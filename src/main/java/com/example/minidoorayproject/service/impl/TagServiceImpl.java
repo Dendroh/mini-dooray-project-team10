@@ -1,12 +1,14 @@
 package com.example.minidoorayproject.service.impl;
 
 import com.example.minidoorayproject.domain.TagDto;
+import com.example.minidoorayproject.domain.TagDtoResp;
+import com.example.minidoorayproject.domain.TagPostReq;
 import com.example.minidoorayproject.entity.Tag;
 import com.example.minidoorayproject.entity.Project;
 import com.example.minidoorayproject.exception.ResourceNotFoundException;
 import com.example.minidoorayproject.repository.TagRepository;
 import com.example.minidoorayproject.repository.ProjectRepository;
-import com.example.minidoorayproject.service.TagInterface;
+import com.example.minidoorayproject.service.TagService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +17,7 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-public class TagServiceImpl implements TagInterface {
+public class TagServiceImpl implements TagService {
 
     private final TagRepository tagRepository;
     private final ProjectRepository projectRepository;
@@ -46,6 +48,16 @@ public class TagServiceImpl implements TagInterface {
     }
 
     @Override
+    public TagDtoResp createTagByDto(TagPostReq postReq) {
+        Tag newTag = new Tag();
+        newTag.setTagName(postReq.getTagName());
+        newTag.setTagColor(postReq.getTagColor());
+        newTag.setProject(projectRepository.findByProjectId(postReq.getProjectId()));
+
+        return convertToResp(tagRepository.saveAndFlush(newTag));
+    }
+
+    @Override
     public void updateTagBy(TagDto tagDto) {
         Tag tag = tagRepository.findById(tagDto.getTagId())
                 .orElseThrow(() -> new ResourceNotFoundException("Tag", "id", tagDto.getTagId()));
@@ -68,5 +80,9 @@ public class TagServiceImpl implements TagInterface {
     private TagDto convertToDto(Tag tag) {
         return new TagDto(tag.getTagId(), tag.getTagName(), tag.getTagColor(), tag.getProject().getProjectId());
 
+    }
+
+    public static TagDtoResp convertToResp(Tag tag) {
+        return new TagDtoResp(tag.getTagId(), tag.getTagName(), tag.getTagColor(), tag.getProject().getProjectId());
     }
 }

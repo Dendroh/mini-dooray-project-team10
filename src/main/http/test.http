@@ -41,7 +41,7 @@ Host: localhost:8082
 Content-Type: application/json
 
 {
-  "projectId": 52,
+  "projectId": 124,
   "newProjectTitle" : "민트초코 불매단 유예",
   "newStatusName": "Inactive"
 }
@@ -140,10 +140,10 @@ DELETE /projects/members/Project 1/example4@gmail.com
 Host: localhost:8082
 ###
 
+
 # task API
 
-#
-
+# task api.1 GET /task/{id}
 GET /task/1
 Host: localhost:8082
 ###
@@ -175,13 +175,33 @@ Host: localhost:8082
 Content-Type: application/json
 
 {
-  "taskId": 83,
+  "taskId": 84,
   "newTaskTitle": "추가추가 테스크",
   "newTaskContent": "쓸 내용 있음"
 }
 ###
 
 
-DELETE /task/83
+DELETE /task/84
+Host: localhost:8082
+###
+
+
+# tag API
+
+# tag api.1 GET /tags/{projectId}
+GET /tags/1
 Host: localhost:8082
 
+###
+
+# tag api.2 /tags/
+POST /tags/
+Host: localhost:8082
+Content-Type: application/json
+
+{
+  "tagName": "태그 11",
+  "tagColor": "#FFFFFF",
+  "projectId": 1
+}

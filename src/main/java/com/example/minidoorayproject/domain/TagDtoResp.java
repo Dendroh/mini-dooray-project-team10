@@ -1,13 +1,18 @@
 package com.example.minidoorayproject.domain;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
-
-import javax.validation.constraints.NotNull;
+import lombok.Setter;
 
 @Getter
-public class TagPostReq {
+@Setter
+@AllArgsConstructor
+public class TagDtoResp {
+    private Integer tagId;
+
     private String tagName;
+
     private String tagColor;
-    @NotNull
+
     private Integer projectId;
 }

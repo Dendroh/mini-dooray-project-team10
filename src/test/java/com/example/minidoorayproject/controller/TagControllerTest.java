@@ -1,7 +1,7 @@
 package com.example.minidoorayproject.controller;
 
 import com.example.minidoorayproject.domain.TagDto;
-import com.example.minidoorayproject.service.TagInterface;
+import com.example.minidoorayproject.service.TagService;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -28,7 +28,7 @@ public class TagControllerTest {
     private MockMvc mockMvc;
 
     @MockBean
-    private TagInterface tagService;
+    private TagService tagService;
 
     @Autowired
     private ObjectMapper objectMapper;
