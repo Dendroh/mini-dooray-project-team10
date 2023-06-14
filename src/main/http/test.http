@@ -12,6 +12,7 @@ GET /projects/account/email/example1@gmail.com
 Host: localhost:8082
 ###
 
+
 GET /projects/id/2
 Host: localhost:8082
 
@@ -245,8 +246,8 @@ Content-Type: application/json
 
 {
   "milestoneName": "milestone23232",
-  "startDatetime": "2020-03-11",
-  "endDatetime": "2020-04-11",
+  "startDatetime": "2020-03-11T00:00:00",
+  "endDatetime": "2020-04-11T00:00:00",
   "projectId": 3
 }
 ###
@@ -264,8 +265,8 @@ Content-Type: application/json
 {
   "milestoneId": 4,
   "milestoneName": "milestoneeeeee",
-  "startDatetime": "2020-05-11",
-  "endDatetime": "2020-06-11"
+  "startDatetime": "2020-05-11 00:00:00",
+  "endDatetime": "2020-06-11 00:00:00"
 }
 ###
 
@@ -275,4 +276,38 @@ Host: localhost:8082
 ###
 
 
-#
+
+# comment API
+
+# comment api.1 GET /comments/{taskId}
+GET /comments/2
+Host: localhost:8082
+
+###
+
+# comment api.2 POST /comments/
+POST /comments/
+Host: localhost:8082
+Content-Type: application/json
+
+{
+  "content": "민초단은 물러가라!",
+  "taskId": 2,
+  "writerEmail": "example5@gmail.com"
+}
+###
+
+# comment api.3 PUT /comments/
+PUT /comments/
+Host: localhost:8082
+Content-Type: application/json
+
+{
+  "commentId": 18,
+  "content": "물러가라 민초다안!!111"
+}
+###
+
+# comment api.4 DELETE /comments/{commentId}
+DELETE /comments/18
+Host: localhost:8082

@@ -8,7 +8,6 @@ import lombok.Data;
 @JsonInclude(value = JsonInclude.Include.NON_NULL)
 @AllArgsConstructor
 public class TaskMilestoneBundleDto {
-
         private int taskId;
 
         private int milestoneId;

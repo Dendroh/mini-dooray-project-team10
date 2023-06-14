@@ -20,6 +20,7 @@ public class Comment {
     private Integer commentId;
 
     private String content;
+
     @Column(name = "write_time")
     private LocalDateTime writeTime;
 

@@ -46,7 +46,6 @@ public class MilestoneController {
         return milestoneService.createMilestone(postReq);
     }
 
-
     @PostMapping("/milestones")
     public ResponseEntity<MileStoneDto> createMilestone(@Valid @RequestBody MileStoneDto milestoneDto, BindingResult result) {
         if (result.hasErrors())

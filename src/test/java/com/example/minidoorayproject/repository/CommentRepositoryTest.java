@@ -149,7 +149,7 @@ class CommentRepositoryTest {
         entityManager.persist(project);
 
         Task task = new Task();
-        task.setTaskName("testTask");
+        task.setTaskName("testTask111111");
         task.setContent("Test Content");
         task.setWriteTime(LocalDateTime.now());
         task.setWriter(writer);

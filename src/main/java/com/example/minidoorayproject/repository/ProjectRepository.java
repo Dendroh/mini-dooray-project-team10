@@ -12,7 +12,6 @@ import java.util.List;
 
 @Repository
 public interface ProjectRepository extends JpaRepository<Project, Integer>, ProjectRepositoryCustom {
-
     Project findByProjectId(Integer id);
 
     List<Project> findAllByAdmin_MemberId(String accountId);
