@@ -1,6 +1,8 @@
 package com.example.minidoorayproject.controller;
 
 
+import com.example.minidoorayproject.domain.TagDto;
+import com.example.minidoorayproject.domain.TagDtoResp;
 import com.example.minidoorayproject.domain.TaskTagBundleDto;
 import com.example.minidoorayproject.domain.TaskTagBundlePostReq;
 import com.example.minidoorayproject.exception.ValidationFailedException;
@@ -20,8 +22,8 @@ public class TaskTagBundleController {
     private final TaskTagBundleService taskTagBundleService;
 
     @GetMapping("/task/tag/{taskName}")
-    public ResponseEntity<List<TaskTagBundleDto>> getAllTagsByTaskName(@PathVariable String taskName) {
-        List<TaskTagBundleDto> bundles = taskTagBundleService.selectAllTagsByTaskName(taskName);
+    public ResponseEntity<List<TagDtoResp>> getAllTagsByTaskName(@PathVariable String taskName) {
+        List<TagDtoResp> bundles = taskTagBundleService.selectAllTagsByTaskName(taskName);
         return ResponseEntity.ok(bundles);
     }
 

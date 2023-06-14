@@ -103,28 +103,28 @@ Host: localhost:8082
 
 
 
-# task API
-
-# task api.1 - GET
-
-
-###
-
 # projectMemberBundle API
 
+# projectMemberBundle api.1 GET /projects/members/{projectTitle}
+# : projectTitle로 project에 속한 다수 member 조회
 GET /projects/members/Project 2
 Host: localhost:8082
-
 ###
 
+
+# projectMemberBundle api.2 GET /members/projects/{memberEmail}
+# : memberEmail로 member가 속한 다수 project 조회
 GET /members/projects/example3@gmail.com
 Host: localhost:8082
-
 ###
 
+
+# projectMemberBundle api.3 GET /projects/members/id/{projectId}
+# : projectId로
 GET /projects/members/id/1
 Host: localhost:8082
 ###
+
 
 POST /projects/members
 Host: localhost:8082
@@ -134,8 +134,8 @@ Content-Type: application/json
   "projectTitle": "Project 1",
   "memberEmail": "example4@gmail.com"
 }
-
 ###
+
 
 DELETE /projects/members/Project 1/example4@gmail.com
 Host: localhost:8082
@@ -227,7 +227,6 @@ Host: localhost:8082
 ###
 
 
-
 # milestone API
 
 # milestone api.1 GET /milestones/{id}
@@ -274,7 +273,6 @@ Content-Type: application/json
 DELETE /milestones/4
 Host: localhost:8082
 ###
-
 
 
 # comment API
