@@ -13,9 +13,9 @@ import java.time.LocalDateTime;
 public class TaskDtoResp {
     private Integer taskId;
 
-    private String taskName;
+    private String taskTitle;
 
-    private String content;
+    private String taskContent;
 
     private LocalDateTime writeTime;
 

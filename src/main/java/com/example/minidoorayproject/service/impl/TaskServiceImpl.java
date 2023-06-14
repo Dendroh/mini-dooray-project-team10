@@ -138,8 +138,8 @@ public class TaskServiceImpl implements TaskService {
     public static TaskDtoResp convertToResp(TaskDto taskDto) {
         TaskDtoResp resp = new TaskDtoResp();
         resp.setTaskId(taskDto.getTaskId());
-        resp.setTaskName(taskDto.getTaskName());
-        resp.setContent(taskDto.getContent());
+        resp.setTaskTitle(taskDto.getTaskName());
+        resp.setTaskContent(taskDto.getContent());
         resp.setWriterEmail(taskDto.getWriter().getMemberEmail());
         resp.setWriteTime(taskDto.getWriteTime());
         resp.setWriterName(taskDto.getWriter().getMemberName());
@@ -150,8 +150,8 @@ public class TaskServiceImpl implements TaskService {
     public static TaskDtoResp convertToResp(Task task) {
         TaskDtoResp resp = new TaskDtoResp();
         resp.setTaskId(task.getTaskId());
-        resp.setTaskName(task.getTaskName());
-        resp.setContent(task.getContent());
+        resp.setTaskTitle(task.getTaskName());
+        resp.setTaskContent(task.getContent());
         resp.setWriterEmail(task.getWriter().getMemberEmail());
         resp.setWriteTime(task.getWriteTime());
         resp.setWriterName(task.getWriter().getMemberName());
