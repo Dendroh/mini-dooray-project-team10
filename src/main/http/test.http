@@ -234,6 +234,10 @@ GET /milestones/1
 Host: localhost:8082
 ###
 
+GET /milestones/project/1
+Host: localhost:8082
+###
+
 # milestone api.2 POST /milestones/
 POST /milestones/
 Host: localhost:8082
@@ -268,3 +272,7 @@ Content-Type: application/json
 # milestone api.4 DELETE /milestones/{id}
 DELETE /milestones/4
 Host: localhost:8082
+###
+
+
+#

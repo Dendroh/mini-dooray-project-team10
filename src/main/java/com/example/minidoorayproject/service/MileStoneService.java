@@ -10,6 +10,8 @@ import java.util.List;
 public interface MileStoneService {
     MileStoneDto getMilestoneById(Integer milestoneId);
 
+    List<MilestoneResp> getMilestoneByProjectId(Integer projectId);
+
     List<MileStoneDto> getAllMilestones();
 
     MileStoneDto createMilestone(MileStoneDto milestoneDto);

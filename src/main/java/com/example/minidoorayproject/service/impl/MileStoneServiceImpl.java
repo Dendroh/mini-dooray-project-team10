@@ -8,12 +8,10 @@ import com.example.minidoorayproject.entity.Milestone;
 import com.example.minidoorayproject.entity.Project;
 import com.example.minidoorayproject.exception.NotFoundMileStoneException;
 import com.example.minidoorayproject.exception.NotFoundProjectException;
-import com.example.minidoorayproject.exception.ResourceNotFoundException;
 import com.example.minidoorayproject.repository.MilestoneRepository;
 import com.example.minidoorayproject.repository.ProjectRepository;
 import com.example.minidoorayproject.service.MileStoneService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -36,6 +34,13 @@ public class MileStoneServiceImpl implements MileStoneService {
                 .orElseThrow(NotFoundMileStoneException::new);
 
         return new MileStoneDto(milestone.getMilestoneId(), milestone.getMilestoneName(), milestone.getStartDatetime(), milestone.getEndDatetime(), milestone.getProject().getProjectId());
+    }
+
+    @Override
+    public List<MilestoneResp> getMilestoneByProjectId(Integer projectId) {
+        return milestoneRepository.findAllByProject_ProjectId(projectId).stream()
+                .map(MileStoneServiceImpl::convertToResp)
+                .collect(Collectors.toList());
     }
 
     @Override

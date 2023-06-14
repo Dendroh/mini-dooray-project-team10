@@ -27,6 +27,11 @@ public class MilestoneController {
         return ResponseEntity.ok(milestone);
     }
 
+    @GetMapping("/milestones/project/{id}")
+    public List<MilestoneResp> getMilestoneByDto(@PathVariable("id") Integer projectId) {
+        return milestoneService.getMilestoneByProjectId(projectId);
+    }
+
     @GetMapping("/milestones")
     public ResponseEntity<List<MileStoneDto>> getAllMilestones() {
         List<MileStoneDto> milestones = milestoneService.getAllMilestones();
