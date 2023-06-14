@@ -16,4 +16,16 @@ public class CommentPostReq {
 
     @NotBlank
     private String writerEmail;
+
+    public void setContent(String testContent) {
+        this.content = testContent;
+    }
+
+    public void setTaskId(int id) {
+        this.taskId = id;
+    }
+
+    public void setWriterEmail(String email) {
+        this.writerEmail = email;
+    }
 }

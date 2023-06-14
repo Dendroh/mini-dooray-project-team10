@@ -12,4 +12,16 @@ public class TagPostReq {
     private String tagColor;
     @NotNull
     private Integer projectId;
+
+    public void setTagName(String tag1) {
+        this.tagName = tag1;
+    }
+
+    public void setTagColor(String blue) {
+        this.tagColor = blue;
+    }
+
+    public void setProjectId(int i) {
+        this.projectId = i;
+    }
 }

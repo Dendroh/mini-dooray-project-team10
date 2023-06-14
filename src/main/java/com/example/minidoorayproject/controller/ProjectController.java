@@ -47,7 +47,7 @@ public class ProjectController {
 
     @GetMapping("/account/{accountId}")
     public ResponseEntity<List<ProjectDto>> getProjectsByAccount(@PathVariable String accountId) {
-        List<ProjectDto> projects = projectService.selectAllProjectBy(accountId);
+        List<ProjectDto> projects = projectService.selectAllProjectBy(Integer.parseInt(accountId));
         return ResponseEntity.ok(projects);
     }
 

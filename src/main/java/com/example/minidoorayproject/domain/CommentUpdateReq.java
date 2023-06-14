@@ -12,4 +12,12 @@ public class CommentUpdateReq {
 
     @NotBlank
     private String content;
+
+    public void setContent(String updatedContent) {
+        this.content = updatedContent;
+    }
+
+    public void setCommentId(int id) {
+        this.commentId = id;
+    }
 }

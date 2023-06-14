@@ -17,4 +17,5 @@ public class MemberDto {
 
   private String memberEmail;
 
+
 }
