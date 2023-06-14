@@ -20,13 +20,13 @@ public class TagController {
         return ResponseEntity.ok(tags);
     }
 
-    @PostMapping("/tags")
+    @PostMapping("/tags/")
     public ResponseEntity<Void> createTag(@RequestBody TagDto tagDto) {
         tagService.createTagBy(tagDto);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
-    @PutMapping("/tags")
+    @PutMapping("/tags/")
     public ResponseEntity<Void> updateTag(@RequestBody TagDto tagDto) {
         tagService.updateTagBy(tagDto);
         return ResponseEntity.ok().build();

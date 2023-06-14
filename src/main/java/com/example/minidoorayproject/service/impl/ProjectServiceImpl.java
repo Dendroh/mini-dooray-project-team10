@@ -66,12 +66,7 @@ public class ProjectServiceImpl implements ProjectService {
         project.setProjectStatus(codeRepository.findByCodeId(1));
         project.setAdmin(memberByEmail);
 
-        projectRepository.saveAndFlush(project);
-
-        if (Objects.isNull(projectRepository.findByProjectTitle(postReq.getProjectTitle())))
-            return convertToResp(project);
-        else
-            return null;
+        return convertToResp(projectRepository.saveAndFlush(project));
     }
 
 

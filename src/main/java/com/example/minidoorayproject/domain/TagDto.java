@@ -14,7 +14,6 @@ import javax.validation.constraints.NotNull;
 @JsonInclude(value = JsonInclude.Include.NON_NULL)
 @AllArgsConstructor
 public class TagDto {
-    @NotNull
     private Integer tagId;
 
     private String tagName;
@@ -22,6 +21,5 @@ public class TagDto {
     private String tagColor;
     @NotNull
     private Integer projectId;
-
 
 }
