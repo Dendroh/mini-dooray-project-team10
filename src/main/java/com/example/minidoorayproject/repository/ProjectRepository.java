@@ -15,12 +15,10 @@ public interface ProjectRepository extends JpaRepository<Project, Integer>, Proj
 
     Project findByProjectId(Integer id);
 
-    List<ProjectDtoImpl> findByAdmin_MemberEmail(String email);
-
     List<Project> findAllByAdmin_MemberId(String accountId);
 
     Project findByProjectTitle(String projectTitle);
 
-    ProjectDtoImpl getByProjectTitle(String projectTitle);
+    ProjectDtoImpl getByProjectId(Integer projectId);
 }
 

@@ -14,7 +14,6 @@ public interface ProjectService {
     List<ProjectResp> getProjectByMemberEmail(String email);
     List<ProjectDto> selectAllProjectBy(String accountId);
     ProjectDto updateProjectBy(Integer id, ProjectDto projectDto);
-    ProjectResp updateProjectByTitle(ProjectUpdateReq updateReq);
+    ProjectResp updateProjectById(ProjectUpdateReq updateReq);
     void deleteProject(Integer id);
-    void deleteProject(String title);
 }

@@ -132,12 +132,12 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     @Transactional
-    public ProjectResp updateProjectByTitle(ProjectUpdateReq updateReq) {
-        ProjectDtoImpl projectByTitle = projectRepository.getByProjectTitle(updateReq.getProjectTitle());
+    public ProjectResp updateProjectById(ProjectUpdateReq updateReq) {
+        ProjectDtoImpl projectByTitle = projectRepository.getByProjectId(updateReq.getProjectId());
         StatusCode statusCodeByName = codeRepository.findByCodeName(updateReq.getNewStatusName());
 
         if (Objects.isNull(projectByTitle))
-            throw new NotFoundProjectException(updateReq.getProjectTitle());
+            throw new NotFoundProjectException(updateReq.getProjectId());
 
         if (Objects.isNull(statusCodeByName))
             throw new NotFoundStatusCodeException(updateReq.getNewStatusName());
@@ -155,17 +155,6 @@ public class ProjectServiceImpl implements ProjectService {
             throw new IllegalArgumentException("Invalid project Id:" + id);
         }
         projectRepository.deleteById(id);
-    }
-
-    @Override
-    @Transactional
-    public void deleteProject(String title) {
-        Project project = projectRepository.findByProjectTitle(title);
-
-        if (Objects.isNull(project))
-            throw new NotFoundProjectException(title);
-
-        projectRepository.deleteById(project.getProjectId());
     }
 
     public static ProjectDto convertToDto(Project project) {

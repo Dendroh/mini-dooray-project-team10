@@ -34,24 +34,24 @@ Content-Type: application/json
 
 
 # project api.3 - PUT /projects/
-# : ProjectUpdateReq(projectTitle, newProjectTitle, newStatusName)로 단일 project 수정
+# : ProjectUpdateReq(projectId, newProjectTitle, newStatusName)로 단일 project 수정
 
 PUT /projects/
 Host: localhost:8082
 Content-Type: application/json
 
 {
-  "projectTitle": "민트초코 불매단 플젝",
-  "newProjectTitle" : "민트초코 불매단 유예 대형 플젝",
+  "projectId": 52,
+  "newProjectTitle" : "민트초코 불매단 유예",
   "newStatusName": "Inactive"
 }
 ###
 
 
-# project api.4 - DELETE /projects/title/{title}
-# : title로 단일 project 삭제
+# project api.4 - DELETE /projects/id/{projectId}
+# : projectId로 단일 project 삭제
 
-DELETE /projects/title/민트초코 불매단 유예 대형 플젝
+DELETE /projects/52
 Host: localhost:8082
 
 

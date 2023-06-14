@@ -63,21 +63,16 @@ public class ProjectController {
     }
 
     @PutMapping("/")
-    public ProjectResp updateProjectByTitle(@Valid @RequestBody ProjectUpdateReq updateReq, BindingResult result) {
+    public ProjectResp updateProjectById(@Valid @RequestBody ProjectUpdateReq updateReq, BindingResult result) {
         if (result.hasErrors())
             throw new ValidationFailedException(result);
 
-        return projectService.updateProjectByTitle(updateReq);
-    }
-
-    @DeleteMapping("/title/{title}")
-    public void deleteProjectByTitle(@PathVariable("title") String title) {
-        projectService.deleteProject(title);
+        return projectService.updateProjectById(updateReq);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteProject(@PathVariable Integer id) {
+    public void deleteProjectById(@PathVariable("id") Integer id) {
         projectService.deleteProject(id);
-        return ResponseEntity.noContent().build();
     }
+
 }
