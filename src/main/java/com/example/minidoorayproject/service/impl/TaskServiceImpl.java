@@ -93,8 +93,8 @@ public class TaskServiceImpl implements TaskService {
     @Override
     public TaskDtoResp createTaskByDto(TaskPostReq postReq) {
         Task task = new Task();
-        task.setTaskName(postReq.getTaskName());
-        task.setContent(postReq.getContent());
+        task.setTaskName(postReq.getTaskTitle());
+        task.setContent(postReq.getTaskContent());
         task.setProject(projectRepository.findByProjectId(postReq.getProjectId()));
         task.setWriter(memberRepository.findByMemberEmail(postReq.getWriterEmail()));
         task.setWriteTime(LocalDateTime.now().plusHours(9));

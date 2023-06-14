@@ -11,9 +11,9 @@ import javax.validation.constraints.NotNull;
 @Getter
 public class TaskPostReq {
     @NotBlank
-    private String taskName;
+    private String taskTitle;
 
-    private String content;
+    private String taskContent;
 
     @NotNull
     private Integer projectId;
