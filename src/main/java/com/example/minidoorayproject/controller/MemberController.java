@@ -13,6 +13,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping("/members")
@@ -34,6 +35,12 @@ public class MemberController {
 
         return memberService.createMemberByDto(postReq);
     }
+
+    @GetMapping("")
+    public List<MemberDto> getAllMember() {
+        return memberService.getAllMember();
+    }
+
 
     @GetMapping("/{id}")
     public ResponseEntity<MemberDto> getMember(@PathVariable Integer id) {

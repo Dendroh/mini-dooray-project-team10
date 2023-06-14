@@ -1,6 +1,9 @@
 package com.example.minidoorayproject.controller;
 
 import com.example.minidoorayproject.domain.MileStoneDto;
+import com.example.minidoorayproject.domain.MileStonePostReq;
+import com.example.minidoorayproject.domain.MilestoneResp;
+import com.example.minidoorayproject.domain.MilestoneUpdateReq;
 import com.example.minidoorayproject.exception.ValidationFailedException;
 import com.example.minidoorayproject.service.MileStoneService;
 import lombok.RequiredArgsConstructor;
@@ -30,6 +33,15 @@ public class MilestoneController {
         return ResponseEntity.ok(milestones);
     }
 
+    @PostMapping("/milestones/")
+    public MilestoneResp postMilestoneByDto(@Valid @RequestBody MileStonePostReq postReq, BindingResult result) {
+        if (result.hasErrors())
+            throw new ValidationFailedException(result);
+
+        return milestoneService.createMilestone(postReq);
+    }
+
+
     @PostMapping("/milestones")
     public ResponseEntity<MileStoneDto> createMilestone(@Valid @RequestBody MileStoneDto milestoneDto, BindingResult result) {
         if (result.hasErrors())
@@ -37,6 +49,14 @@ public class MilestoneController {
 
         MileStoneDto createdMilestone = milestoneService.createMilestone(milestoneDto);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdMilestone);
+    }
+
+    @PutMapping("/milestones/")
+    public MilestoneResp updateMilestone(@Valid @RequestBody MilestoneUpdateReq updateReq, BindingResult result) {
+        if (result.hasErrors())
+            throw new ValidationFailedException(result);
+
+        return milestoneService.updateMilestone(updateReq);
     }
 
     @PutMapping("/milestones/{id}")

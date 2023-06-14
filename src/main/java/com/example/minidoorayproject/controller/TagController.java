@@ -3,6 +3,7 @@ package com.example.minidoorayproject.controller;
 import com.example.minidoorayproject.domain.TagDto;
 import com.example.minidoorayproject.domain.TagDtoResp;
 import com.example.minidoorayproject.domain.TagPostReq;
+import com.example.minidoorayproject.domain.TagUpdateReq;
 import com.example.minidoorayproject.exception.ValidationFailedException;
 import com.example.minidoorayproject.service.TagService;
 import lombok.RequiredArgsConstructor;
@@ -26,6 +27,7 @@ public class TagController {
     }
 
     @PostMapping("/tags/")
+    @ResponseStatus(value = HttpStatus.CREATED)
     public TagDtoResp postTagByDto(@Valid @RequestBody TagPostReq postReq, BindingResult result) {
         if (result.hasErrors())
             throw new ValidationFailedException(result);
@@ -45,10 +47,13 @@ public class TagController {
         return ResponseEntity.ok().build();
     }
 
-//    @PutMapping("/tags/")
-//    public TagDtoResp updateTagByDto() {
-//
-//    }
+    @PutMapping("/tags/")
+    public TagDtoResp updateTagByDto(@Valid @RequestBody TagUpdateReq updateReq, BindingResult result) {
+        if (result.hasErrors())
+            throw new ValidationFailedException(result);
+
+        return tagService.updateTagByDto(updateReq);
+    }
 
     @DeleteMapping("/tags/{tagId}")
     public ResponseEntity<Void> deleteTag(@PathVariable String tagId) {

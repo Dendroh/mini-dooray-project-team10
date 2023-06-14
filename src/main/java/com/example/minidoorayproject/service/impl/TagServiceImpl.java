@@ -3,14 +3,17 @@ package com.example.minidoorayproject.service.impl;
 import com.example.minidoorayproject.domain.TagDto;
 import com.example.minidoorayproject.domain.TagDtoResp;
 import com.example.minidoorayproject.domain.TagPostReq;
+import com.example.minidoorayproject.domain.TagUpdateReq;
 import com.example.minidoorayproject.entity.Tag;
 import com.example.minidoorayproject.entity.Project;
+import com.example.minidoorayproject.exception.NotFoundTaskById;
 import com.example.minidoorayproject.exception.ResourceNotFoundException;
 import com.example.minidoorayproject.repository.TagRepository;
 import com.example.minidoorayproject.repository.ProjectRepository;
 import com.example.minidoorayproject.service.TagService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -58,6 +61,21 @@ public class TagServiceImpl implements TagService {
     }
 
     @Override
+    @Transactional
+    public TagDtoResp updateTagByDto(TagUpdateReq updateReq) {
+        Tag updateTag = tagRepository.findById(updateReq.getTagId())
+                .orElseThrow(() -> {
+                    throw new NotFoundTaskById(updateReq.getTagId());
+                });
+
+        updateTag.setTagName(updateReq.getTagName());
+        updateTag.setTagColor(updateReq.getTagColor());
+
+        return convertToResp(updateTag);
+    }
+
+    @Override
+    @Transactional
     public void updateTagBy(TagDto tagDto) {
         Tag tag = tagRepository.findById(tagDto.getTagId())
                 .orElseThrow(() -> new ResourceNotFoundException("Tag", "id", tagDto.getTagId()));
@@ -70,6 +88,7 @@ public class TagServiceImpl implements TagService {
     }
 
     @Override
+    @Transactional
     public void deleteTagBy(String tagId) {
         Tag tag = tagRepository.findById(Integer.valueOf(tagId))
                 .orElseThrow(() -> new ResourceNotFoundException("Tag", "id", tagId));

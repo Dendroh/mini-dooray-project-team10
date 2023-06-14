@@ -25,7 +25,8 @@ public class RestControllerAdvice {
     }
 
     @ExceptionHandler(value = {NotFoundMemberException.class, NotFoundProjectException.class,
-            NotFoundProjectMemberBundleException.class, NotFoundStatusCodeException.class})
+            NotFoundProjectMemberBundleException.class, NotFoundStatusCodeException.class,
+            ResourceNotFoundException.class})
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ResponseBody
     public ExceptionRequest notFounds(Exception ig, HttpServletRequest req) {

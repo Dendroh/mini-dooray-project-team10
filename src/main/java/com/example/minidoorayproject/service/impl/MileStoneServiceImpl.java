@@ -1,6 +1,9 @@
 package com.example.minidoorayproject.service.impl;
 
 import com.example.minidoorayproject.domain.MileStoneDto;
+import com.example.minidoorayproject.domain.MileStonePostReq;
+import com.example.minidoorayproject.domain.MilestoneResp;
+import com.example.minidoorayproject.domain.MilestoneUpdateReq;
 import com.example.minidoorayproject.entity.Milestone;
 import com.example.minidoorayproject.entity.Project;
 import com.example.minidoorayproject.exception.NotFoundMileStoneException;
@@ -12,7 +15,10 @@ import com.example.minidoorayproject.service.MileStoneService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
@@ -57,6 +63,17 @@ public class MileStoneServiceImpl implements MileStoneService {
     }
 
     @Override
+    public MilestoneResp createMilestone(MileStonePostReq postReq) {
+        Milestone milestone = new Milestone();
+        milestone.setMilestoneName(postReq.getMilestoneName());
+        milestone.setStartDatetime(postReq.getStartDatetime());
+        milestone.setEndDatetime(postReq.getEndDatetime());
+        milestone.setProject(projectRepository.findByProjectId(postReq.getProjectId()));
+
+        return convertToResp(milestoneRepository.saveAndFlush(milestone));
+    }
+
+    @Override
     public MileStoneDto updateMilestone(MileStoneDto milestoneDto) {
         Milestone milestone = milestoneRepository.findById(milestoneDto.getMilestoneId())
                 .orElseThrow(NotFoundMileStoneException::new);
@@ -76,11 +93,32 @@ public class MileStoneServiceImpl implements MileStoneService {
     }
 
     @Override
+    @Transactional
+    public MilestoneResp updateMilestone(MilestoneUpdateReq updateReq) {
+        Milestone milestone = milestoneRepository.findByMilestoneId(updateReq.getMilestoneId());
+
+        if (Objects.isNull(milestone))
+            throw new NotFoundMileStoneException();
+
+        milestone.setMilestoneName(updateReq.getMilestoneName());
+        milestone.setStartDatetime(updateReq.getStartDatetime());
+        milestone.setEndDatetime(updateReq.getEndDatetime());
+
+        return convertToResp(milestone);
+    }
+
+    @Override
+    @Transactional
     public void deleteMilestone(Integer milestoneId) {
         if(!milestoneRepository.existsById(milestoneId)) {
             throw new NotFoundMileStoneException();
         }
 
         milestoneRepository.deleteById(milestoneId);
+    }
+
+    public static MilestoneResp convertToResp(Milestone milestone) {
+        return new MilestoneResp(milestone.getMilestoneId(), milestone.getMilestoneName(),
+                milestone.getStartDatetime(), milestone.getEndDatetime(), milestone.getProject().getProjectId());
     }
 }

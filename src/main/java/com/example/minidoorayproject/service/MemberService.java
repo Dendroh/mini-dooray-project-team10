@@ -16,6 +16,8 @@ import java.util.List;
   public interface MemberService {
    MemberDto selectAllMemberBy(String memberId);
 
+   List<MemberDto> getAllMember();
+
     MemberDto  createMember(Member member);
 
     MemberDto createMemberByDto(MemberPostReq postReq);

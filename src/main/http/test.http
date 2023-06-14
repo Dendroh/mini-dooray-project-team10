@@ -148,16 +148,18 @@ GET /task/1
 Host: localhost:8082
 ###
 
-
+# task api.2 GET /task/memberEmail/{memberEmail}
 GET /task/memberEmail/example1@gmail.com
 Host: localhost:8082
 ###
 
+# task api.3 GET /task/id/{id}
 GET /task/id/2
 Host: localhost:8082
 
 ###
 
+# task
 POST /task/
 Host: localhost:8082
 Content-Type: application/json
@@ -192,16 +194,53 @@ Host: localhost:8082
 # tag api.1 GET /tags/{projectId}
 GET /tags/1
 Host: localhost:8082
-
 ###
 
-# tag api.2 /tags/
+# tag api.2 POST /tags/
 POST /tags/
 Host: localhost:8082
 Content-Type: application/json
 
 {
-  "tagName": "태그 11",
+  "tagName": "태그 121",
   "tagColor": "#FFFFFF",
   "projectId": 1
 }
+###
+
+# tag api.3 PUT /tags/
+PUT /tags/
+Host: localhost:8082
+Content-Type: application/json
+
+{
+  "tagId": 18,
+  "tagName": "tag 11111",
+  "tagColor": "#EFEFFF"
+}
+###
+
+# tag api.4 DELETE /tags/{tagId}
+DELETE /tags/18
+Host: localhost:8082
+###
+
+
+# milestone API
+
+# milestone api.1 GET /milestones/{id}
+GET /milestones/1
+Host: localhost:8082
+###
+
+# milestone api.2 POST /milestones/
+POST /milestones/
+Host: localhost:8082
+Content-Type: application/json
+
+{
+  "milestoneName": "milestoneeeeee",
+  "startDatetime": "2020-03-11"
+}
+###
+

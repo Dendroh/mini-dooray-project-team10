@@ -4,12 +4,17 @@ import lombok.Getter;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.time.LocalDateTime;
 
 @Getter
-public class TagPostReq {
+public class MileStonePostReq {
     @NotBlank
-    private String tagName;
-    private String tagColor;
+    private String milestoneName;
+
+    private LocalDateTime startDatetime;
+
+    private LocalDateTime endDatetime;
+
     @NotNull
     private Integer projectId;
 }
