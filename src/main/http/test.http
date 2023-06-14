@@ -226,6 +226,7 @@ Host: localhost:8082
 ###
 
 
+
 # milestone API
 
 # milestone api.1 GET /milestones/{id}
@@ -239,8 +240,31 @@ Host: localhost:8082
 Content-Type: application/json
 
 {
+  "milestoneName": "milestone23232",
+  "startDatetime": "2020-03-11",
+  "endDatetime": "2020-04-11",
+  "projectId": 3
+}
+###
+//{
+//  "milestoneId": 4,
+//  "milestoneName": "milestoneeeeee",
+//}
+###
+
+# milestone api.3 PUT /milestones/
+PUT /milestones/
+Host: localhost:8082
+Content-Type: application/json
+
+{
+  "milestoneId": 4,
   "milestoneName": "milestoneeeeee",
-  "startDatetime": "2020-03-11"
+  "startDatetime": "2020-05-11",
+  "endDatetime": "2020-06-11"
 }
 ###
 
+# milestone api.4 DELETE /milestones/{id}
+DELETE /milestones/4
+Host: localhost:8082
