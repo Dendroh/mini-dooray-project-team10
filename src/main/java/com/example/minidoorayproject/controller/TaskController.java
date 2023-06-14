@@ -3,6 +3,7 @@ package com.example.minidoorayproject.controller;
 import com.example.minidoorayproject.domain.TaskDto;
 import com.example.minidoorayproject.domain.TaskDtoResp;
 import com.example.minidoorayproject.domain.TaskPostReq;
+import com.example.minidoorayproject.domain.TaskUpdateReq;
 import com.example.minidoorayproject.exception.ValidationFailedException;
 import com.example.minidoorayproject.service.TaskService;
 import lombok.RequiredArgsConstructor;
@@ -39,12 +40,17 @@ public class TaskController {
         return service.createTaskByDto(postReq);
     }
 
-//    @PutMapping("/task/")
-//    public TaskDtoResp updateTask(@Valid @RequestBody TaskDto, BindingResult result) {
-//        if (result.hasErrors())
-//            throw new ValidationFailedException(result);
-//
-//
-//    }
+    @PutMapping("/task/")
+    public TaskDtoResp updateTask(@Valid @RequestBody TaskUpdateReq updateReq, BindingResult result) {
+        if (result.hasErrors())
+            throw new ValidationFailedException(result);
+
+        return service.updateTask(updateReq);
+    }
+
+    @DeleteMapping("/task/{taskId}")
+    public void deleteTask(@PathVariable("taskId") Integer taskId) {
+        service.deleteTask(taskId);
+    }
 
 }

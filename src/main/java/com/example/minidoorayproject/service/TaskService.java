@@ -3,6 +3,7 @@ package com.example.minidoorayproject.service;
 import com.example.minidoorayproject.domain.TaskDto;
 import com.example.minidoorayproject.domain.TaskDtoResp;
 import com.example.minidoorayproject.domain.TaskPostReq;
+import com.example.minidoorayproject.domain.TaskUpdateReq;
 
 import java.util.List;
 
@@ -15,7 +16,9 @@ public interface TaskService {
 
     TaskDtoResp createTaskByDto(TaskPostReq postReq);
 
+    TaskDtoResp updateTask(TaskUpdateReq updateReq);
+
     TaskDtoResp updateTask(int id, TaskDto taskDto);
 
-    void deleteTask(int id);
+    void deleteTask(Integer id);
 }

@@ -170,3 +170,18 @@ Content-Type: application/json
 }
 ###
 
+PUT /task/
+Host: localhost:8082
+Content-Type: application/json
+
+{
+  "taskId": 83,
+  "newTaskTitle": "추가추가 테스크",
+  "newTaskContent": "쓸 내용 있음"
+}
+###
+
+
+DELETE /task/83
+Host: localhost:8082
+

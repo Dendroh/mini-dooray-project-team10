@@ -3,6 +3,7 @@ package com.example.minidoorayproject.service.impl;
 import com.example.minidoorayproject.domain.TaskDto;
 import com.example.minidoorayproject.domain.TaskDtoResp;
 import com.example.minidoorayproject.domain.TaskPostReq;
+import com.example.minidoorayproject.domain.TaskUpdateReq;
 import com.example.minidoorayproject.entity.Member;
 import com.example.minidoorayproject.entity.Project;
 import com.example.minidoorayproject.entity.ProjectMemberBundle;
@@ -16,6 +17,7 @@ import com.example.minidoorayproject.repository.TaskRepository;
 import com.example.minidoorayproject.service.TaskService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -36,8 +38,15 @@ public class TaskServiceImpl implements TaskService {
     private final ProjectMemberBundleRepository bundleRepository;
 
 
-    public void deleteTask(int id) {
-        taskRepository.deleteById(id);
+    @Override
+    @Transactional
+    public void deleteTask(Integer id) {
+        Task deleteTask = taskRepository.findById(id)
+                        .orElseThrow(() -> {
+                            throw new NotFoundTaskById(id);
+                        });
+
+        taskRepository.deleteById(deleteTask.getTaskId());
     }
 
     @Override
@@ -92,6 +101,24 @@ public class TaskServiceImpl implements TaskService {
 
         return convertToResp(taskRepository.saveAndFlush(task));
     }
+
+    @Override
+    @Transactional
+    public TaskDtoResp updateTask(TaskUpdateReq updateReq) {
+        Task taskById = taskRepository.findById(updateReq.getTaskId())
+                .orElseThrow(() -> {
+                    throw new NotFoundTaskById(updateReq.getTaskId());
+                });
+
+        taskById.setTaskName(updateReq.getNewTaskTitle());
+        taskById.setContent(updateReq.getNewTaskContent());
+
+        return convertToResp(taskById);
+    }
+
+
+
+
 
     @Override
     public TaskDtoResp updateTask(int id, TaskDto taskDto) {
