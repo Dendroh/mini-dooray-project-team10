@@ -11,8 +11,7 @@ public interface ProjectService {
     ProjectResp createProjectByPostReq(ProjectPostReq postReq);
     ProjectDto getProjectById(Integer id);
     ProjectResp findProjectById(Integer projectId);
-
-    List<ProjectResp> getProjectByAdminEmail(String email);
+    List<ProjectResp> getProjectByMemberEmail(String email);
     List<ProjectDto> selectAllProjectBy(String accountId);
     ProjectDto updateProjectBy(Integer id, ProjectDto projectDto);
     ProjectResp updateProjectByTitle(ProjectUpdateReq updateReq);

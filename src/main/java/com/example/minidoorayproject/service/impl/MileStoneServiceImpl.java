@@ -3,11 +3,14 @@ package com.example.minidoorayproject.service.impl;
 import com.example.minidoorayproject.domain.MileStoneDto;
 import com.example.minidoorayproject.entity.Milestone;
 import com.example.minidoorayproject.entity.Project;
+import com.example.minidoorayproject.exception.NotFoundMileStoneException;
+import com.example.minidoorayproject.exception.NotFoundProjectException;
 import com.example.minidoorayproject.exception.ResourceNotFoundException;
 import com.example.minidoorayproject.repository.MilestoneRepository;
 import com.example.minidoorayproject.repository.ProjectRepository;
 import com.example.minidoorayproject.service.MileStoneService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -17,59 +20,67 @@ import java.util.stream.Collectors;
 public class MileStoneServiceImpl implements MileStoneService {
 
     private final MilestoneRepository milestoneRepository;
+
     private final ProjectRepository projectRepository;
 
-    @Override
-    public List<MileStoneDto> selectAllMileStoneBy(String projectId) {
-        List<Milestone> milestones = milestoneRepository.findAllByProject_ProjectId(Integer.parseInt(projectId));
 
-        return milestones.stream()
-                .map(this::convertToDto)
+    @Override
+    public MileStoneDto getMilestoneById(Integer milestoneId) {
+        Milestone milestone = milestoneRepository.findById(milestoneId)
+                .orElseThrow(NotFoundMileStoneException::new);
+
+        return new MileStoneDto(milestone.getMilestoneId(), milestone.getMilestoneName(), milestone.getStartDatetime(), milestone.getEndDatetime(), milestone.getProject().getProjectId());
+    }
+
+    @Override
+    public List<MileStoneDto> getAllMilestones() {
+        return milestoneRepository.findAll().stream()
+                .map(milestone -> new MileStoneDto(milestone.getMilestoneId(), milestone.getMilestoneName(), milestone.getStartDatetime(), milestone.getEndDatetime(), milestone.getProject().getProjectId()))
                 .collect(Collectors.toList());
     }
 
     @Override
-    public void createMileStoneBy(MileStoneDto mileStoneDto) {
+    public MileStoneDto createMilestone(MileStoneDto milestoneDto) {
         Milestone milestone = new Milestone();
-        milestone.setMilestoneName(mileStoneDto.getMilestoneName());
-        milestone.setStartDatetime(mileStoneDto.getStartDatetime());
-        milestone.setEndDatetime(mileStoneDto.getEndDatetime());
+        milestone.setMilestoneName(milestoneDto.getMilestoneName());
+        milestone.setStartDatetime(milestoneDto.getStartDatetime());
+        milestone.setEndDatetime(milestoneDto.getEndDatetime());
 
-        // Retrieve the project
-        Project project = projectRepository.findById(mileStoneDto.getProjectId())
-                .orElseThrow(() -> new ResourceNotFoundException("Project", "id", mileStoneDto.getProjectId()));
+        Project project = projectRepository.findById(milestoneDto.getProjectId())
+                .orElseThrow(() -> new NotFoundProjectException(milestoneDto.getProjectId()));
 
-        // Set the project reference
         milestone.setProject(project);
 
-        milestoneRepository.save(milestone);
+        Milestone savedMilestone = milestoneRepository.save(milestone);
+
+        return new MileStoneDto(savedMilestone.getMilestoneId(), savedMilestone.getMilestoneName(), savedMilestone.getStartDatetime(), savedMilestone.getEndDatetime(), savedMilestone.getProject().getProjectId());
     }
 
     @Override
-    public void updateMileStoneBy(MileStoneDto mileStoneDto) {
-        Milestone milestone = milestoneRepository.findById(mileStoneDto.getMilestoneId())
-                .orElseThrow(() -> new ResourceNotFoundException("Milestone", "id", mileStoneDto.getMilestoneId()));
+    public MileStoneDto updateMilestone(MileStoneDto milestoneDto) {
+        Milestone milestone = milestoneRepository.findById(milestoneDto.getMilestoneId())
+                .orElseThrow(NotFoundMileStoneException::new);
 
-        milestone.setMilestoneName(mileStoneDto.getMilestoneName());
-        milestone.setStartDatetime(mileStoneDto.getStartDatetime());
-        milestone.setEndDatetime(mileStoneDto.getEndDatetime());
-        // Update other fields if needed
+        milestone.setMilestoneName(milestoneDto.getMilestoneName());
+        milestone.setStartDatetime(milestoneDto.getStartDatetime());
+        milestone.setEndDatetime(milestoneDto.getEndDatetime());
+        // Assuming there's a method in the Milestone class to set the project using the project ID.
+        Project project = projectRepository.findById(milestoneDto.getProjectId())
+                .orElseThrow(() -> new NotFoundProjectException(milestoneDto.getProjectId()));
 
-        milestoneRepository.save(milestone);
+        milestone.setProject(project);
+
+        Milestone updatedMilestone = milestoneRepository.save(milestone);
+
+        return new MileStoneDto(updatedMilestone.getMilestoneId(), updatedMilestone.getMilestoneName(), updatedMilestone.getStartDatetime(), updatedMilestone.getEndDatetime(), updatedMilestone.getProject().getProjectId());
     }
 
     @Override
-    public void deleteMileStoneBy(String mileStoneId) {
-        Milestone milestone = milestoneRepository.findById(Integer.parseInt(mileStoneId))
-                .orElseThrow(() -> new ResourceNotFoundException("Milestone", "id", mileStoneId));
+    public void deleteMilestone(Integer milestoneId) {
+        if(!milestoneRepository.existsById(milestoneId)) {
+            throw new NotFoundMileStoneException();
+        }
 
-        milestoneRepository.delete(milestone);
-    }
-
-    private MileStoneDto convertToDto(Milestone milestone) {
-        MileStoneDto mileStoneDto = new MileStoneDto(milestone.getMilestoneId(), milestone.getMilestoneName(),
-                milestone.getStartDatetime(), milestone.getEndDatetime(), milestone.getProject().getProjectId());
-
-        return mileStoneDto;
+        milestoneRepository.deleteById(milestoneId);
     }
 }

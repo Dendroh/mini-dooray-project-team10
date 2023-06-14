@@ -4,11 +4,14 @@ package com.example.minidoorayproject.service.impl;
 import com.example.minidoorayproject.domain.*;
 import com.example.minidoorayproject.entity.Member;
 import com.example.minidoorayproject.entity.Project;
+import com.example.minidoorayproject.entity.ProjectMemberBundle;
 import com.example.minidoorayproject.entity.StatusCode;
 import com.example.minidoorayproject.exception.NotFoundMemberException;
 import com.example.minidoorayproject.exception.NotFoundProjectException;
+import com.example.minidoorayproject.exception.NotFoundProjectMemberBundleException;
 import com.example.minidoorayproject.exception.NotFoundStatusCodeException;
 import com.example.minidoorayproject.repository.MemberRepository;
+import com.example.minidoorayproject.repository.ProjectMemberBundleRepository;
 import com.example.minidoorayproject.repository.ProjectRepository;
 import com.example.minidoorayproject.repository.StatusCodeRepository;
 import com.example.minidoorayproject.service.ProjectService;
@@ -29,6 +32,8 @@ public class ProjectServiceImpl implements ProjectService {
     private final MemberRepository memberRepository;
 
     private final StatusCodeRepository codeRepository;
+
+    private final ProjectMemberBundleRepository bundleRepository;
 
     @Override
     public ProjectDto createProjectBy(ProjectDto projectDto) {
@@ -89,13 +94,14 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public List<ProjectResp> getProjectByAdminEmail(String email) {
-        List<ProjectDtoImpl> projectDtoList = projectRepository.findByAdmin_MemberEmail(email);
+    public List<ProjectResp> getProjectByMemberEmail(String email) {
+        List<ProjectMemberBundle> bundleDtoList = bundleRepository.findByMember_MemberEmail(email);
 
-        if (projectDtoList.isEmpty())
-            throw new NotFoundProjectException("admin email: " + email);
+        if (bundleDtoList.isEmpty())
+            throw new NotFoundProjectMemberBundleException();
 
-        return projectDtoList.stream()
+        return bundleDtoList.stream()
+                .map(ProjectMemberBundle::getProject)
                 .map(ProjectServiceImpl::convertToResp)
                 .collect(Collectors.toList());
     }

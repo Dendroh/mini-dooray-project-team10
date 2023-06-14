@@ -9,13 +9,12 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 @RestController
-@RequestMapping("/projects")
 @RequiredArgsConstructor
 public class TagController {
 
     private final TagInterface tagService;
 
-    @GetMapping("/{projectId}/tags")
+    @GetMapping("/tags/{projectId}")
     public ResponseEntity<List<TagDto>> getAllTagsByProjectId(@PathVariable String projectId) {
         List<TagDto> tags = tagService.selectAllTagBy(projectId);
         return ResponseEntity.ok(tags);

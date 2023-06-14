@@ -4,8 +4,13 @@ import com.example.minidoorayproject.domain.MileStoneDto;
 import java.util.List;
 
 public interface MileStoneService {
-    List<MileStoneDto> selectAllMileStoneBy(String projectId);
-    void createMileStoneBy(MileStoneDto mileStoneDto);
-    void updateMileStoneBy(MileStoneDto mileStoneDto);
-    void deleteMileStoneBy(String mileStoneId);
+    MileStoneDto getMilestoneById(Integer milestoneId);
+
+    List<MileStoneDto> getAllMilestones();
+
+    MileStoneDto createMilestone(MileStoneDto milestoneDto);
+
+    MileStoneDto updateMilestone(MileStoneDto milestoneDto);
+
+    void deleteMilestone(Integer milestoneId);
 }

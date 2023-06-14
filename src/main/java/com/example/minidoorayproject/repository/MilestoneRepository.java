@@ -9,8 +9,10 @@ import java.util.List;
 
 @Repository
 public interface MilestoneRepository extends JpaRepository<Milestone, Integer> {
-    List<Milestone> findAllByProject_ProjectId(int parseInt);
+    List<Milestone> findAllByProject_ProjectId(Integer parseInt);
 
+    Milestone findByMilestoneId(Integer id);
 
+    Milestone findByMilestoneName(String milestoneName);
 
 }

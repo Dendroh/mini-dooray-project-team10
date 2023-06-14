@@ -51,9 +51,9 @@ public class ProjectController {
         return ResponseEntity.ok(projects);
     }
 
-    @GetMapping("/account/email/{adminEmail}")
-    public List<ProjectResp> getProjectsByAdminEmail(@PathVariable String adminEmail) {
-        return projectService.getProjectByAdminEmail(adminEmail);
+    @GetMapping("/account/email/{memberEmail}")
+    public List<ProjectResp> getProjectsByMemberEmail(@PathVariable String memberEmail) {
+        return projectService.getProjectByMemberEmail(memberEmail);
     }
 
     @PutMapping("/{id}")

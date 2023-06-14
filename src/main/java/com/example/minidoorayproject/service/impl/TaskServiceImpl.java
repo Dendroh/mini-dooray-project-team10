@@ -9,14 +9,12 @@ import com.example.minidoorayproject.entity.ProjectMemberBundle;
 import com.example.minidoorayproject.entity.Task;
 import com.example.minidoorayproject.exception.NotFoundMemberException;
 import com.example.minidoorayproject.exception.NotFoundTaskById;
-import com.example.minidoorayproject.exception.ResourceNotFoundException;
 import com.example.minidoorayproject.repository.MemberRepository;
 import com.example.minidoorayproject.repository.ProjectMemberBundleRepository;
 import com.example.minidoorayproject.repository.ProjectRepository;
 import com.example.minidoorayproject.repository.TaskRepository;
 import com.example.minidoorayproject.service.TaskService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -37,27 +35,6 @@ public class TaskServiceImpl implements TaskService {
 
     private final ProjectMemberBundleRepository bundleRepository;
 
-
-    public Task createTask(Task task) {
-        return taskRepository.save(task);
-    }
-
-    public Task getTask(int id) {
-        return taskRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("task", "id", id));
-    }
-
-    public Task updateTask(int id, Task updatedTask) {
-        return taskRepository.findById(id)
-                .map(task -> {
-                    task.setTaskName(updatedTask.getTaskName());
-                    task.setContent(updatedTask.getContent());
-                    return taskRepository.save(task);
-                })
-                .orElseGet(() -> {
-                    updatedTask.setTaskId(id);
-                    return taskRepository.save(updatedTask);
-                });
-    }
 
     public void deleteTask(int id) {
         taskRepository.deleteById(id);
@@ -115,6 +92,17 @@ public class TaskServiceImpl implements TaskService {
 
         return convertToResp(taskRepository.saveAndFlush(task));
     }
+
+    @Override
+    public TaskDtoResp updateTask(int id, TaskDto taskDto) {
+        Task taskById = taskRepository.findById(id).orElseThrow(() -> {
+            throw new NotFoundTaskById(id);
+        });
+
+
+        return null;
+    }
+
 
     public static TaskDto convertToDto(Task task) {
         return new TaskDto(task.getTaskId(), task.getTaskName(), task.getContent(), task.getWriteTime(), task.getProject(), task.getWriter());

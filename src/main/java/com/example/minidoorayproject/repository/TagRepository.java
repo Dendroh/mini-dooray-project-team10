@@ -11,5 +11,7 @@ import java.util.List;
 
 @Repository
 public interface TagRepository extends JpaRepository<Tag, Integer> {
-    List<Tag> findAllByProject_ProjectId(int projectId);
+    List<Tag> findAllByProject_ProjectId(Integer projectId);
+
+    Tag findByTagName(String tagName);
 }
