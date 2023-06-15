@@ -12,7 +12,7 @@ public interface ProjectService {
     ProjectDto getProjectById(Integer id);
     ProjectResp findProjectById(Integer projectId);
     List<ProjectResp> getProjectByMemberEmail(String email);
-    List<ProjectDto> selectAllProjectBy(String accountId);
+    List<ProjectDto> selectAllProjectBy(Integer accountId);
     ProjectDto updateProjectBy(Integer id, ProjectDto projectDto);
     ProjectResp updateProjectById(ProjectUpdateReq updateReq);
     void deleteProject(Integer id);

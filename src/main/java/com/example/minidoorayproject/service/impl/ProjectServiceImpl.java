@@ -100,7 +100,7 @@ public class ProjectServiceImpl implements ProjectService {
 
 
     @Override
-    public List<ProjectDto> selectAllProjectBy(String accountId) {
+    public List<ProjectDto> selectAllProjectBy(Integer accountId) {
         List<Project> projects = projectRepository.findAllByAdmin_MemberId(accountId);
 
         return projects.stream()

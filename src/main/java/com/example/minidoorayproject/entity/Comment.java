@@ -30,6 +30,7 @@ public class Comment {
     private Task task;
 
     @ManyToOne
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "member_writer_id")
     private Member writer;
 
