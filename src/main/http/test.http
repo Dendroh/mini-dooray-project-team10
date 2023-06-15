@@ -77,14 +77,28 @@ Content-Type: application/json
 ###
 
 # member api.3 - PUT /members/
-# : MemberUpdateReq(email(기준 이메일), newName, newEmail - 전부 notBlank)로 단일 member 수정
-PUT /members/
+# : MemberUpdateEmailReq(email(기준 이메일), newName, newEmail - 전부 notBlank)로 단일 member 수정
+PUT /members/name/
+Host: localhost:8082
+Content-Type: application/json
+
+{
+  "email": "example3333@gmail.com",
+  "newName": "name3333"
+}
+###
+#{
+#  "email": "noMincho@gmail.com",
+#  "newName": "name3333",
+#  "newEmail": "example3333@gmail.com"
+#}
+###
+PUT /members/email/
 Host: localhost:8082
 Content-Type: application/json
 
 {
   "email": "noMincho@gmail.com",
-  "newName": "name3333",
   "newEmail": "example3333@gmail.com"
 }
 ###

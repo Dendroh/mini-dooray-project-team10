@@ -5,15 +5,12 @@ import lombok.Setter;
 
 import javax.validation.constraints.NotBlank;
 
-@Setter
 @Getter
-public class MemberUpdateReq {
+@Setter
+public class MemberUpdateNameReq {
     @NotBlank
     private String email;
 
     @NotBlank
     private String newName;
-
-    @NotBlank
-    private String newEmail;
 }

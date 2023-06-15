@@ -2,7 +2,8 @@ package com.example.minidoorayproject.service.impl;
 
 import com.example.minidoorayproject.domain.MemberDto;
 import com.example.minidoorayproject.domain.MemberPostReq;
-import com.example.minidoorayproject.domain.MemberUpdateReq;
+import com.example.minidoorayproject.domain.MemberUpdateEmailReq;
+import com.example.minidoorayproject.domain.MemberUpdateNameReq;
 import com.example.minidoorayproject.entity.Member;
 import com.example.minidoorayproject.exception.NotFoundMemberException;
 import com.example.minidoorayproject.exception.ResourceNotFoundException;
@@ -84,7 +85,7 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     @Transactional
-    public MemberDto updateMemberByDto(MemberUpdateReq updateReq) {
+    public MemberDto updateMemberByDtoByEmail(MemberUpdateEmailReq updateReq) {
         Member member = memberRepository.findByMemberEmail(updateReq.getEmail());
 
         if (Objects.isNull(member))
@@ -92,6 +93,21 @@ public class MemberServiceImpl implements MemberService {
 
         MemberDto memberDto = convertToDto(member);
         memberDto.setMemberEmail(updateReq.getNewEmail());
+
+        memberRepository.updateMemberByDto(memberDto);
+
+        return memberDto;
+    }
+
+    @Override
+    @Transactional
+    public MemberDto updateMemberByDtoByName(MemberUpdateNameReq updateReq) {
+        Member member = memberRepository.findByMemberEmail(updateReq.getEmail());
+
+        if (Objects.isNull(member))
+            throw new NotFoundMemberException(updateReq.getEmail());
+
+        MemberDto memberDto = convertToDto(member);
         memberDto.setMemberName(updateReq.getNewName());
 
         memberRepository.updateMemberByDto(memberDto);
