@@ -7,12 +7,13 @@ Host: localhost:8082
 
 # project api.1 - GET /projects/account/email/{memberEmail}
 # : memberEmail 다수 project 조회
-
 GET /projects/account/email/example1@gmail.com
 Host: localhost:8082
 ###
 
 
+# project api.2 - GET /projects/id/{projectId}
+# :
 GET /projects/id/2
 Host: localhost:8082
 
@@ -22,7 +23,6 @@ Host: localhost:8082
 # project api.2 - POST /projects/
 # : ProjectPostReq(projectTitle, adminEmail)로 단일 project 추가
 # <project 생성 루트 : member 추가 --adminEmail-->>   project 추가(현재)  --(projectId, adminEmail)-->>  project_member_bundle 추가 순으로 진행 바람>
-
 POST /projects/
 Host: localhost:8082
 Content-Type: application/json
@@ -36,7 +36,6 @@ Content-Type: application/json
 
 # project api.3 - PUT /projects/
 # : ProjectUpdateReq(projectId, newProjectTitle, newStatusName)로 단일 project 수정
-
 PUT /projects/
 Host: localhost:8082
 Content-Type: application/json
@@ -51,7 +50,6 @@ Content-Type: application/json
 
 # project api.4 - DELETE /projects/id/{projectId}
 # : projectId로 단일 project 삭제
-
 DELETE /projects/52
 Host: localhost:8082
 
@@ -61,7 +59,6 @@ Host: localhost:8082
 
 # member api.1 - GET /members/email/{email}
 # : email로 단일 member 조회
-
 GET /members/email/example5@gmail.com
 Host: localhost:8082
 ###
@@ -69,7 +66,6 @@ Host: localhost:8082
 
 # member api.2 - POST /members/
 # : MemberPostReq(memberName(notBlank), memberEmail(notBlank))로 단일 member 추가
-
 POST /members/
 Host: localhost:8082
 Content-Type: application/json
@@ -82,7 +78,6 @@ Content-Type: application/json
 
 # member api.3 - PUT /members/
 # : MemberUpdateReq(email(기준 이메일), newName, newEmail - 전부 notBlank)로 단일 member 수정
-
 PUT /members/
 Host: localhost:8082
 Content-Type: application/json
@@ -96,7 +91,6 @@ Content-Type: application/json
 
 # member api.4 - DELETE /members/email/{email}
 # : email로 단일 member 삭제
-
 DELETE /members/email/example3333@gmail.com
 Host: localhost:8082
 ###
@@ -105,27 +99,29 @@ Host: localhost:8082
 
 # projectMemberBundle API
 
-# projectMemberBundle api.1 GET /projects/members/{projectTitle}
+# projectMemberBundle api.1 - GET /projects/members/{projectTitle}
 # : projectTitle로 project에 속한 다수 member 조회
 GET /projects/members/Project 2
 Host: localhost:8082
 ###
 
 
-# projectMemberBundle api.2 GET /members/projects/{memberEmail}
+# projectMemberBundle api.2 - GET /members/projects/{memberEmail}
 # : memberEmail로 member가 속한 다수 project 조회
 GET /members/projects/example3@gmail.com
 Host: localhost:8082
 ###
 
 
-# projectMemberBundle api.3 GET /projects/members/id/{projectId}
-# : projectId로
+# projectMemberBundle api.3 - GET /projects/members/id/{projectId}
+# : projectId로 project에 속한 다수 member 조회
 GET /projects/members/id/1
 Host: localhost:8082
 ###
 
 
+# projectMemberBundle api.4 - POST /projects/members
+# :
 POST /projects/members
 Host: localhost:8082
 Content-Type: application/json
@@ -135,6 +131,7 @@ Content-Type: application/json
   "memberEmail": "example4@gmail.com"
 }
 ###
+
 
 
 DELETE /projects/members/Project 1/example4@gmail.com
@@ -309,3 +306,14 @@ Content-Type: application/json
 # comment api.4 DELETE /comments/{commentId}
 DELETE /comments/18
 Host: localhost:8082
+###
+
+
+
+# taskTagBundle API
+
+# taskTagBundle api.1 GET /task/tag/{taskName}
+GET /task/tag/Task 1
+Host: localhost:8082
+###
+

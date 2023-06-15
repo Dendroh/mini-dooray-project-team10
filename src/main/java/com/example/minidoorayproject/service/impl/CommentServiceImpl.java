@@ -73,6 +73,7 @@ public class CommentServiceImpl implements CommentService {
 
 
     public static CommentResp convertToResp(Comment comment) {
-        return new CommentResp(comment.getCommentId(), comment.getContent(), comment.getWriteTime(), comment.getTask().getTaskId(), comment.getWriter().getMemberId());
+        return new CommentResp(comment.getCommentId(), comment.getContent(), comment.getWriteTime(),
+                comment.getTask().getTaskId(), comment.getWriter().getMemberEmail(), comment.getWriter().getMemberName());
     }
 }

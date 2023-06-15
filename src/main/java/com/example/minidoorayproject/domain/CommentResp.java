@@ -16,5 +16,7 @@ public class CommentResp {
 
     private Integer taskId;
 
-    private Integer writerId;
+    private String writerEmail;
+
+    private String writerName;
 }

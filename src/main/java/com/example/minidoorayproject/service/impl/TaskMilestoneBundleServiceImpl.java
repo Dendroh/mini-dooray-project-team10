@@ -7,6 +7,7 @@ import com.example.minidoorayproject.domain.TaskMilestoneBundlePostReq;
 import com.example.minidoorayproject.entity.Milestone;
 import com.example.minidoorayproject.entity.Task;
 import com.example.minidoorayproject.entity.TaskMileStoneBundle;
+import com.example.minidoorayproject.exception.NotFoundMileStoneException;
 import com.example.minidoorayproject.exception.NotFoundTaskMileStoneBundleException;
 import com.example.minidoorayproject.repository.MilestoneRepository;
 import com.example.minidoorayproject.repository.TaskMilestoneBundleRepository;
@@ -16,6 +17,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
@@ -38,6 +40,10 @@ public class TaskMilestoneBundleServiceImpl implements TaskMilestoneBundleServic
     @Override
     public List<TaskDto> selectAllTaskByMilestoneName(String milestoneName) {
         Milestone milestone = milestoneRepository.findByMilestoneName(milestoneName);
+
+        if (Objects.isNull(milestone))
+            throw new NotFoundMileStoneException();
+
         List<TaskMileStoneBundle> bundles = taskMilestoneBundleRepository.findByMilestone_MilestoneId(milestone.getMilestoneId());
         return bundles.stream()
                 .map(bundle -> convertTaskToDto(bundle.getTask()))
