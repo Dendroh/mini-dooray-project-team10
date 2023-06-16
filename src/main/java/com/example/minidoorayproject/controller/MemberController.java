@@ -2,7 +2,8 @@ package com.example.minidoorayproject.controller;
 
 import com.example.minidoorayproject.domain.MemberDto;
 import com.example.minidoorayproject.domain.MemberPostReq;
-import com.example.minidoorayproject.domain.MemberUpdateReq;
+import com.example.minidoorayproject.domain.MemberUpdateEmailReq;
+import com.example.minidoorayproject.domain.MemberUpdateNameReq;
 import com.example.minidoorayproject.entity.Member;
 import com.example.minidoorayproject.exception.ValidationFailedException;
 import com.example.minidoorayproject.service.MemberService;
@@ -54,12 +55,20 @@ public class MemberController {
         return ResponseEntity.ok(memberDto);
     }
 
-    @PutMapping("/")
-    public MemberDto updateMemberByDto(@Valid @RequestBody MemberUpdateReq updateReq, BindingResult result) {
+    @PutMapping("/email/")
+    public MemberDto updateMemberByDto(@Valid @RequestBody MemberUpdateEmailReq updateReq, BindingResult result) {
         if (result.hasErrors())
             throw new ValidationFailedException(result);
 
-        return memberService.updateMemberByDto(updateReq);
+        return memberService.updateMemberByDtoByEmail(updateReq);
+    }
+
+    @PutMapping("/name/")
+    public MemberDto updateMemberByDto(@Valid @RequestBody MemberUpdateNameReq updateReq, BindingResult result) {
+        if (result.hasErrors())
+            throw new ValidationFailedException(result);
+
+        return memberService.updateMemberByDtoByName(updateReq);
     }
 
     @PutMapping("/{id}")

@@ -92,9 +92,6 @@ public class ProjectServiceImpl implements ProjectService {
     public List<ProjectResp> getProjectByMemberEmail(String email) {
         List<ProjectMemberBundle> bundleDtoList = bundleRepository.findByMember_MemberEmail(email);
 
-        if (bundleDtoList.isEmpty())
-            throw new NotFoundProjectMemberBundleException();
-
         return bundleDtoList.stream()
                 .map(ProjectMemberBundle::getProject)
                 .map(ProjectServiceImpl::convertToResp)
