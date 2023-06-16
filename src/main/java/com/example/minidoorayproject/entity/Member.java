@@ -1,27 +1,31 @@
 package com.example.minidoorayproject.entity;
 
+import lombok.*;
+
+import javax.persistence.*;
+
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Getter
 @Setter
 @Entity
-@Table(name = "Member")
+@Table(name = "member")
 @NoArgsConstructor
 public class Member {
   @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "member_id")
   private Integer memberId;
 
-  @Column(name = "member_name")
+  @Column(name = "name")
   private String memberName;
 
-  @Column(name = "member_email")
+  @Column(name = "email")
   private String memberEmail;
+
 }

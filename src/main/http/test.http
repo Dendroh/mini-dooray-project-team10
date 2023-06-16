@@ -1,0 +1,333 @@
+### project 조회
+GET /projects/1
+Host: localhost:8082
+
+###
+## project API
+
+# project api.1 - GET /projects/account/email/{memberEmail}
+# : memberEmail 다수 project 조회
+GET /projects/account/email/example1@gmail.com
+Host: localhost:8082
+###
+
+
+# project api.2 - GET /projects/id/{projectId}
+# :
+GET /projects/id/2
+Host: localhost:8082
+
+###
+
+
+# project api.2 - POST /projects/
+# : ProjectPostReq(projectTitle, adminEmail)로 단일 project 추가
+# <project 생성 루트 : member 추가 --adminEmail-->>   project 추가(현재)  --(projectId, adminEmail)-->>  project_member_bundle 추가 순으로 진행 바람>
+POST /projects/
+Host: localhost:8082
+Content-Type: application/json
+
+{
+  "projectTitle": "민트초코 불매단 플젝",
+  "adminEmail": "example2@gmail.com"
+}
+###
+
+
+# project api.3 - PUT /projects/
+# : ProjectUpdateReq(projectId, newProjectTitle, newStatusName)로 단일 project 수정
+PUT /projects/
+Host: localhost:8082
+Content-Type: application/json
+
+{
+  "projectId": 124,
+  "newProjectTitle" : "민트초코 불매단 유예",
+  "newStatusName": "Inactive"
+}
+###
+
+
+# project api.4 - DELETE /projects/id/{projectId}
+# : projectId로 단일 project 삭제
+DELETE /projects/52
+Host: localhost:8082
+
+
+###
+# member API
+
+# member api.1 - GET /members/email/{email}
+# : email로 단일 member 조회
+GET /members/email/example5@gmail.com
+Host: localhost:8082
+###
+
+
+# member api.2 - POST /members/
+# : MemberPostReq(memberName(notBlank), memberEmail(notBlank))로 단일 member 추가
+POST /members/
+Host: localhost:8082
+Content-Type: application/json
+
+{
+  "memberName": "민초 불매단1",
+  "memberEmail": "noMincho@gmail.com"
+}
+###
+
+# member api.3 - PUT /members/
+# : MemberUpdateEmailReq(email(기준 이메일), newName, newEmail - 전부 notBlank)로 단일 member 수정
+PUT /members/name/
+Host: localhost:8082
+Content-Type: application/json
+
+{
+  "email": "example3333@gmail.com",
+  "newName": "name3333"
+}
+###
+#{
+#  "email": "noMincho@gmail.com",
+#  "newName": "name3333",
+#  "newEmail": "example3333@gmail.com"
+#}
+###
+PUT /members/email/
+Host: localhost:8082
+Content-Type: application/json
+
+{
+  "email": "noMincho@gmail.com",
+  "newEmail": "example3333@gmail.com"
+}
+###
+
+# member api.4 - DELETE /members/email/{email}
+# : email로 단일 member 삭제
+DELETE /members/email/example3333@gmail.com
+Host: localhost:8082
+###
+
+
+
+# projectMemberBundle API
+
+# projectMemberBundle api.1 - GET /projects/members/{projectTitle}
+# : projectTitle로 project에 속한 다수 member 조회
+GET /projects/members/Project 2
+Host: localhost:8082
+###
+
+
+# projectMemberBundle api.2 - GET /members/projects/{memberEmail}
+# : memberEmail로 member가 속한 다수 project 조회
+GET /members/projects/example3@gmail.com
+Host: localhost:8082
+###
+
+
+# projectMemberBundle api.3 - GET /projects/members/id/{projectId}
+# : projectId로 project에 속한 다수 member 조회
+GET /projects/members/id/1
+Host: localhost:8082
+###
+
+
+# projectMemberBundle api.4 - POST /projects/members
+# :
+POST /projects/members
+Host: localhost:8082
+Content-Type: application/json
+
+{
+  "projectTitle": "Project 1",
+  "memberEmail": "example4@gmail.com"
+}
+###
+
+
+
+DELETE /projects/members/Project 1/example4@gmail.com
+Host: localhost:8082
+###
+
+
+# task API
+
+# task api.1 GET /task/{id}
+GET /task/1
+Host: localhost:8082
+###
+
+# task api.2 GET /task/memberEmail/{memberEmail}
+GET /task/memberEmail/example1@gmail.com
+Host: localhost:8082
+###
+
+# task api.3 GET /task/id/{id}
+GET /task/id/2
+Host: localhost:8082
+
+###
+
+# task
+POST /task/
+Host: localhost:8082
+Content-Type: application/json
+
+{
+  "taskName": "추가 테스크",
+  "content": "쓸 내용 없음",
+  "projectId": 1,
+  "writerEmail": "example1@gmail.com"
+}
+###
+
+PUT /task/
+Host: localhost:8082
+Content-Type: application/json
+
+{
+  "taskId": 84,
+  "newTaskTitle": "추가추가 테스크",
+  "newTaskContent": "쓸 내용 있음"
+}
+###
+
+
+DELETE /task/84
+Host: localhost:8082
+###
+
+
+# tag API
+
+# tag api.1 GET /tags/{projectId}
+GET /tags/1
+Host: localhost:8082
+###
+
+# tag api.2 POST /tags/
+POST /tags/
+Host: localhost:8082
+Content-Type: application/json
+
+{
+  "tagName": "태그 121",
+  "tagColor": "#FFFFFF",
+  "projectId": 1
+}
+###
+
+# tag api.3 PUT /tags/
+PUT /tags/
+Host: localhost:8082
+Content-Type: application/json
+
+{
+  "tagId": 18,
+  "tagName": "tag 11111",
+  "tagColor": "#EFEFFF"
+}
+###
+
+# tag api.4 DELETE /tags/{tagId}
+DELETE /tags/18
+Host: localhost:8082
+###
+
+
+# milestone API
+
+# milestone api.1 GET /milestones/{id}
+GET /milestones/1
+Host: localhost:8082
+###
+
+GET /milestones/project/1
+Host: localhost:8082
+###
+
+# milestone api.2 POST /milestones/
+POST /milestones/
+Host: localhost:8082
+Content-Type: application/json
+
+{
+  "milestoneName": "milestone23232",
+  "startDatetime": "2020-03-11T00:00:00",
+  "endDatetime": "2020-04-11T00:00:00",
+  "projectId": 3
+}
+###
+//{
+//  "milestoneId": 4,
+//  "milestoneName": "milestoneeeeee",
+//}
+###
+
+# milestone api.3 PUT /milestones/
+PUT /milestones/
+Host: localhost:8082
+Content-Type: application/json
+
+{
+  "milestoneId": 4,
+  "milestoneName": "milestoneeeeee",
+  "startDatetime": "2020-05-11 00:00:00",
+  "endDatetime": "2020-06-11 00:00:00"
+}
+###
+
+# milestone api.4 DELETE /milestones/{id}
+DELETE /milestones/4
+Host: localhost:8082
+###
+
+
+# comment API
+
+# comment api.1 GET /comments/{taskId}
+GET /comments/2
+Host: localhost:8082
+
+###
+
+# comment api.2 POST /comments/
+POST /comments/
+Host: localhost:8082
+Content-Type: application/json
+
+{
+  "content": "민초단은 물러가라!",
+  "taskId": 2,
+  "writerEmail": "example5@gmail.com"
+}
+###
+
+# comment api.3 PUT /comments/
+PUT /comments/
+Host: localhost:8082
+Content-Type: application/json
+
+{
+  "commentId": 18,
+  "content": "물러가라 민초다안!!111"
+}
+###
+
+# comment api.4 DELETE /comments/{commentId}
+DELETE /comments/18
+Host: localhost:8082
+###
+
+
+
+# taskTagBundle API
+
+# taskTagBundle api.1 GET /task/tag/{taskName}
+GET /task/tag/Task 1
+Host: localhost:8082
+###
+
