@@ -1,10 +1,7 @@
 package com.example.minidoorayproject.domain;
 
-import com.example.minidoorayproject.entity.Project;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
-
-import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;

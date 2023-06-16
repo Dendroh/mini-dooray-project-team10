@@ -1,10 +1,6 @@
 package com.example.minidoorayproject.domain;
 
-import com.example.minidoorayproject.entity.Member;
-import com.example.minidoorayproject.entity.Project;
 import lombok.Getter;
-import lombok.Setter;
-
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
@@ -21,19 +17,19 @@ public class TaskPostReq {
     @NotNull
     private String writerEmail;
 
-    public void setTaskTitle(String task1) {
-        taskTitle = task1;
+    public void setTaskTitle(String taskTitle) {
+        this.taskTitle = taskTitle;
     }
 
     public void setTaskContent(String content) {
         taskContent = content;
     }
 
-    public void setProjectId(int i) {
-        projectId = i;
+    public void setProjectId(int projectId) {
+        this.projectId = projectId;
     }
 
-    public void setWriterEmail(String s) {
-        writerEmail = s;
+    public void setWriterEmail(String email) {
+        writerEmail = email;
     }
 }

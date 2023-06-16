@@ -12,8 +12,7 @@ import java.time.LocalDateTime;
 @Getter
 @Entity
 @EqualsAndHashCode
-@NoArgsConstructor
-@AllArgsConstructor
+@RequiredArgsConstructor
 @Table(name = "project_member_bundle")
 public class ProjectMemberBundle {
 

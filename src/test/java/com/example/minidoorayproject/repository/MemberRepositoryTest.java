@@ -6,7 +6,6 @@ import java.util.Optional;
 
 import com.example.minidoorayproject.entity.Member;
 import org.junit.jupiter.api.Test;
-import java.util.List;
 
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;

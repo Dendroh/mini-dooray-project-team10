@@ -12,8 +12,7 @@ import java.io.Serializable;
 
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
+@RequiredArgsConstructor
 @EqualsAndHashCode
 @Embeddable
 public class ProjectMemberBundlePk implements Serializable {
@@ -25,4 +24,8 @@ public class ProjectMemberBundlePk implements Serializable {
     private Integer memberId;
 
 
+    public ProjectMemberBundlePk(int projectId, int memberId) {
+        this.projectId = projectId;
+        this.memberId = memberId;
+    }
 }

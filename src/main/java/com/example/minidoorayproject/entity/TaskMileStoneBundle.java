@@ -13,8 +13,7 @@ import javax.persistence.*;
 @Setter
 @Entity
 @EqualsAndHashCode
-@NoArgsConstructor
-@AllArgsConstructor
+@RequiredArgsConstructor
 @Table(name = "task_milestone_bundle")
 public class TaskMileStoneBundle {
 

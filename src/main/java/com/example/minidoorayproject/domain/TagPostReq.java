@@ -13,15 +13,15 @@ public class TagPostReq {
     @NotNull
     private Integer projectId;
 
-    public void setTagName(String tag1) {
-        this.tagName = tag1;
+    public void setTagName(String tagName) {
+        this.tagName = tagName;
     }
 
-    public void setTagColor(String blue) {
-        this.tagColor = blue;
+    public void setTagColor(String color) {
+        this.tagColor = color;
     }
 
-    public void setProjectId(int i) {
-        this.projectId = i;
+    public void setProjectId(int projectId) {
+        this.projectId = projectId;
     }
 }

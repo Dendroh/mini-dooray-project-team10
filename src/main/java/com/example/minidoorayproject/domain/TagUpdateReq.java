@@ -13,15 +13,15 @@ public class TagUpdateReq {
 
     private String tagColor;
 
-    public void setTagId(int i) {
-        tagId = i;
+    public void setTagId(int tagId) {
+        this.tagId = tagId;
     }
 
-    public void setTagName(String tag1) {
-        this.tagName = tag1;
+    public void setTagName(String tagName) {
+        this.tagName = tagName;
     }
 
-    public void setTagColor(String blue) {
-        this.tagColor = blue;
+    public void setTagColor(String color) {
+        this.tagColor = color;
     }
 }
