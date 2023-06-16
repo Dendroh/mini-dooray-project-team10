@@ -134,6 +134,7 @@ Host: localhost:8082
 ###
 
 
+
 # projectMemberBundle api.4 - POST /projects/members
 # :
 POST /projects/members
@@ -145,7 +146,6 @@ Content-Type: application/json
   "memberEmail": "example4@gmail.com"
 }
 ###
-
 
 
 DELETE /projects/members/Project 1/example4@gmail.com
