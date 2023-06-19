@@ -1,13 +1,8 @@
 package com.example.minidoorayproject.controller;
 
-import static org.hamcrest.Matchers.any;
-import static org.junit.jupiter.api.Assertions.*;
 
 import com.example.minidoorayproject.domain.MemberDto;
-import com.example.minidoorayproject.domain.MileStoneDto;
-import com.example.minidoorayproject.entity.Member;
 import com.example.minidoorayproject.service.MemberService;
-import com.example.minidoorayproject.service.MileStoneService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -25,20 +20,14 @@ import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.ResultActions;
 
-
-import static org.hamcrest.Matchers.hasSize;
-
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK)
 @AutoConfigureMockMvc
 @ExtendWith(MockitoExtension.class)
@@ -103,12 +92,8 @@ public class MemberControllerTest {
     public void testUpdateMember() throws Exception {
         int memberId = 1;
 
-//        MemberDto memberDto = new MemberDto(1, "John", "john@example.com");
-
-
         MemberDto updatedMemberDto = new MemberDto(1, "Updated John", "UpdatedJohn@example.com");
 
-//        given(memberService.updateMember(eq(memberId), (Member) any(Member.class))).willReturn(updatedMemberDto);
         doReturn(updatedMemberDto).when(memberService).updateMember(eq(memberId), ArgumentMatchers.any());
 
 

@@ -11,8 +11,7 @@ import java.io.Serializable;
 
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
+@RequiredArgsConstructor
 @EqualsAndHashCode
 @Embeddable
 public class TaskMileStoneBundlePk implements Serializable {

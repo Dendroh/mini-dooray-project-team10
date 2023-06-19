@@ -13,8 +13,7 @@ import javax.persistence.*;
 @Getter
 @Entity
 @EqualsAndHashCode
-@NoArgsConstructor
-@AllArgsConstructor
+@RequiredArgsConstructor
 @Table(name = "task_tag_bundle")
 public class TaskTagBundle {
    @EmbeddedId

@@ -1,13 +1,8 @@
 package com.example.minidoorayproject.controller;
 
-import com.example.minidoorayproject.domain.MemberDto;
+
 import com.example.minidoorayproject.domain.ProjectDto;
-import com.example.minidoorayproject.entity.Member;
-import com.example.minidoorayproject.entity.Project;
-import com.example.minidoorayproject.entity.StatusCode;
-import com.example.minidoorayproject.repository.ProjectRepository;
 import com.example.minidoorayproject.service.ProjectService;
-import com.example.minidoorayproject.service.impl.ProjectServiceImpl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -39,16 +34,11 @@ class ProjectControllerTest {
     @Autowired
     private ObjectMapper objectMapper;
 
-//    @BeforeEach
-//    public void setup() {
-//        MockitoAnnotations.openMocks(this);
-//    }
 
     @Test
     void testCreateProject() throws Exception {
 
         ProjectDto projectDto = new ProjectDto(11,"Project 11", 1, 10 );
-
 
         // Mock the service method
         doReturn(projectDto).when(projectService).createProjectBy(any());
@@ -98,11 +88,5 @@ class ProjectControllerTest {
                 .andExpect(jsonPath("$.projectTitle").value(projectDto.getProjectTitle()));
     }
 
-    @Test
-    void testDeleteProject() throws Exception {
-//        int projectId = 1;
-//        mockMvc.perform(delete("/projects/{id}", projectId)
-//                        .contentType(MediaType.APPLICATION_JSON))
-//                .andExpect(status().isNoContent());
-    }
+
 }

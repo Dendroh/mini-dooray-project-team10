@@ -1,7 +1,6 @@
 package com.example.minidoorayproject.repository;
 
 
-import com.example.minidoorayproject.domain.ProjectDto;
 import com.example.minidoorayproject.domain.ProjectDtoImpl;
 import com.example.minidoorayproject.entity.Project;
 import org.springframework.data.jpa.repository.JpaRepository;

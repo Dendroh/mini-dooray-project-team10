@@ -10,8 +10,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 @Entity
-@EqualsAndHashCode
-@NoArgsConstructor
+@RequiredArgsConstructor
 @Table(name = "tag")
 public class Tag {
     @Id

@@ -1,6 +1,5 @@
 package com.example.minidoorayproject.controller;
 
-import com.example.minidoorayproject.domain.TaskDto;
 import com.example.minidoorayproject.domain.TaskDtoResp;
 import com.example.minidoorayproject.domain.TaskPostReq;
 import com.example.minidoorayproject.domain.TaskUpdateReq;
@@ -9,9 +8,7 @@ import com.example.minidoorayproject.service.TaskService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-
 import javax.validation.Valid;
-import javax.validation.ValidationException;
 import java.util.List;
 
 @RestController

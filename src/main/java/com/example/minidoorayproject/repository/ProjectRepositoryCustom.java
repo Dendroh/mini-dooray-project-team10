@@ -1,7 +1,6 @@
 package com.example.minidoorayproject.repository;
 
 import com.example.minidoorayproject.domain.ProjectDtoImpl;
-import com.example.minidoorayproject.domain.ProjectUpdateReq;
 import com.example.minidoorayproject.entity.Project;
 import org.springframework.data.repository.NoRepositoryBean;
 

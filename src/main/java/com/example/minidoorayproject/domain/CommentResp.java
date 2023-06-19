@@ -2,7 +2,6 @@ package com.example.minidoorayproject.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-
 import java.time.LocalDateTime;
 
 @Getter
@@ -19,4 +18,6 @@ public class CommentResp {
     private String writerEmail;
 
     private String writerName;
+
+
 }

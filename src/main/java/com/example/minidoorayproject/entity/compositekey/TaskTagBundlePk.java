@@ -10,8 +10,7 @@ import java.io.Serializable;
 
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
+@RequiredArgsConstructor
 @EqualsAndHashCode
 @Embeddable
 public class TaskTagBundlePk implements Serializable {

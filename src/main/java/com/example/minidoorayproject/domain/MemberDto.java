@@ -2,8 +2,6 @@ package com.example.minidoorayproject.domain;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
-import org.springframework.stereotype.Component;
-
 import javax.validation.constraints.NotNull;
 
 @Data
@@ -16,5 +14,6 @@ public class MemberDto {
   private String memberName;
 
   private String memberEmail;
+
 
 }
